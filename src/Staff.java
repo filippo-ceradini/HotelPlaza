@@ -5,6 +5,8 @@ public class Staff {
     private String address;
     private String jobtitle;
     private double salary;
+    private String username;
+    private String password;
 
     public String getName() {return name;}
     public String getSurname() {return surname;}
@@ -31,6 +33,9 @@ public class Staff {
     public void setSalary(double salary) {
         this.salary = salary;
     }
+
+
+
 
 
 }
