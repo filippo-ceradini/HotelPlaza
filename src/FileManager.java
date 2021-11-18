@@ -5,7 +5,36 @@ public class FileManager {
     //Creating files
     File rooms = new File("Rooms.txt");
     File usernames = new File("Accounts.txt");
+    static File staffFile = new File("Staff.txt");
     ArrayList<Integer> roomsNo = new ArrayList<>();
+    ArrayList<Staff> staffDB = getStaff();
+
+    public static void editStaff(ArrayList<Staff> toWrite) {
+        try {
+            FileOutputStream fileOut = new FileOutputStream(staffFile);
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(toWrite);
+            objectOut.close();
+            fileOut.close();
+        } catch (Exception e) {
+            System.out.println("Failed file writing");
+        }
+    }
+
+    public static ArrayList<Staff> getStaff() {
+            ArrayList<Staff> getStaff = new ArrayList<>();
+        try {
+            FileInputStream StaffList = new FileInputStream(staffFile);
+            ObjectInputStream StaffOutPut = new ObjectInputStream(StaffList);
+            getStaff = (ArrayList<Staff>) StaffOutPut.readObject();
+            StaffOutPut.close();
+            StaffList.close();
+        } catch (Exception e) {
+            System.out.println("Failed file reading");
+        }
+        return getStaff;
+    }
+
 
     public void addRoom(Room newRoom) {
         Room[] writeRooms = seeRooms();
@@ -35,8 +64,7 @@ public class FileManager {
         }
     }
 
-    public Room[] seeRooms()
-    {
+    public Room[] seeRooms() {
         Room[] seeRooms = new Room[1000];
         try {
             FileInputStream userList = new FileInputStream(rooms);
@@ -44,12 +72,12 @@ public class FileManager {
             seeRooms = (Room[]) usernamesOut.readObject();
             userList.close();
             usernamesOut.close();
-        }catch(Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Failed file reading");
         }
         return seeRooms;
     }
+
     public void addUser(Guest user) {
 
         ArrayList<Guest> users = seeUsers();
@@ -78,8 +106,7 @@ public class FileManager {
         }
     }*/
 
-    public ArrayList<Guest> seeUsers()
-    {
+    public ArrayList<Guest> seeUsers() {
         ArrayList<Guest> users = new ArrayList<>();
         try {
             FileInputStream userList = new FileInputStream(usernames);
@@ -87,8 +114,7 @@ public class FileManager {
             users = (ArrayList<Guest>) usernamesOut.readObject();
             userList.close();
             usernamesOut.close();
-        }catch(Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Failed file reading");
         }
         return users;
