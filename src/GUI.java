@@ -56,12 +56,10 @@ public class GUI extends Canvas {
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         b.addActionListener(e -> {
-            String data = "Username " + login.getText();
+            /*String data = "Username " + login.getText();
             data += ", Password: "
                     + new String(passw.getPassword());
-            label.setText(data);
-
-            //Menu.wait1s(1000);
+            label.setText(data);*/
             if (login.getText().equals("admin")){
                     System.out.println("cazzone");
                 try {
@@ -70,6 +68,7 @@ public class GUI extends Canvas {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
+                System.out.println("accade dopo");
             }
         });
 
@@ -141,5 +140,7 @@ public class GUI extends Canvas {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
+
     }
+
 }
