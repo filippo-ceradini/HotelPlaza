@@ -8,8 +8,9 @@ public class Room implements Serializable {
     private int size;
     private boolean[][][] empty = new boolean[2023][12][31];
     private int[][][] takenBy = new int[2023][12][31];
-    private int price;
     private int tier;
+    private int price;
+    private int[][][] ticket = new int[2023][12][31];
 
     private static FileManager dataBase = new FileManager();
 
@@ -21,33 +22,40 @@ public class Room implements Serializable {
         Room storing = new Room();
         storing.size = size;
         storing.ID = ID;
-        storing.price = (size*tier);
         storing.tier = tier;
+        storing.price = (size*tier);
         for (int l = 2020; l <= 2023; l++) {
             for (int i = 0; i < 12; i++) {
                 for (int j = 0; j < 31; j++) {
                     storing.empty[l][i][j] = true;
                     storing.takenBy[l][i][j] = 0;
+                    storing.ticket[l][i][j] = 0;
                 }
             }
         }
         dataBase.addRoom(storing);
     }
 
-    public static int takeRoom(int inYear, int outYear, int inMonth, int inDay, int outMonth, int outDay, int guest, int ID) {
+    public static void takeRoom(int inYear, int outYear, int inMonth, int inDay, int outMonth, int outDay, int guest, int ID) {
         Room[] storing = dataBase.seeRooms();
-        int ticket = 0;
+        int days = 0;
         for (int l = inYear; l < outYear; l++) {
             for (int i = inMonth; i < outMonth; i++) {
                 for (int j = inDay; j < outDay; j++) {
                     storing[ID].empty[l][i][j] = false;
                     storing[ID].takenBy[l][i][j] = guest;
-                    ticket += storing[ID].price;
+                    days++;
+                }
+            }
+        }
+        for (int l = inYear; l < outYear; l++) {
+            for (int i = inMonth; i < outMonth; i++) {
+                for (int j = inDay; j < outDay; j++) {
+                    storing[ID].ticket[l][i][j] = (days*storing[ID].size*storing[ID].tier);
                 }
             }
         }
         dataBase.saveChange(storing);
-        return ticket;
     }
 
     public static void allRoomsStatus() {
@@ -186,7 +194,7 @@ public class Room implements Serializable {
 
             }
             if (free == true) {
-                System.out.print("Room No.: " + ID);
+                System.out.print("Room No.: " + ID + " Tier: "+tierName(storing[ID].tier)+" Price: "+storing[ID].price);
             }
         }
     }
@@ -213,7 +221,7 @@ public class Room implements Serializable {
 
             }
             if (free == true) {
-                System.out.print("Room No.: " + ID);
+                System.out.print("Room No.: " + ID + " Size: "+storing[ID].size+" Price: "+storing[ID].price);
             }
         }
     }
@@ -240,7 +248,7 @@ public class Room implements Serializable {
 
             }
             if (free == true) {
-                System.out.print("Room No.: " + ID);
+                System.out.print("Room No.: " + ID + " Tier: "+tierName(storing[ID].tier)+" Size: "+storing[ID].size);
             }
         }
     }
@@ -261,8 +269,36 @@ public class Room implements Serializable {
 
             }
             if (free == true) {
-                System.out.print("Room No.: " + ID);
+                System.out.print("Room No.: " + ID + " Tier: "+tierName(storing[ID].tier)+" Size: "+storing[ID].size+" Price: "+storing[ID].price);
             }
+        }
+    }
+
+    public static void cancelBooking(int inYear, int outYear, int inMonth, int inDay, int outMonth, int outDay, int guest, int ID)
+    {
+        Room[] storing = dataBase.seeRooms();
+        for (int l = inYear; l < outYear; l++) {
+            for (int i = inMonth; i < outMonth; i++) {
+                for (int j = inDay; j < outDay; j++) {
+                    storing[ID].empty[l][i][j] = true;
+                    storing[ID].takenBy[l][i][j] = 0;
+                    storing[ID].ticket[l][i][j] = 0;
+                }
+            }
+        }
+        dataBase.saveChange(storing);
+    }
+    public static String tierName(int tier)
+    {
+        if(tier == 1)
+        {
+            return "economy";
+        }else if(tier == 2)
+        {
+            return "normal";
+        }else
+        {
+            return "luxury";
         }
     }
 
