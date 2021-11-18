@@ -40,6 +40,15 @@ public class Staff implements Serializable{
         this.salary = salary;
     }
 
+    @Override
+    public String toString() {
+        return "Staff{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", phone='" + phone + '\'' +
+                ", salary='" + salary + '\'' +
+                '}';
+    }
 
     /*
     import java.io.Serializable;

@@ -118,7 +118,7 @@ public class GUI extends Canvas {
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         b1.addActionListener(e -> {
-            StaffGUI.ManageStaff();
+            ManageStaff.ManageStaff();
             frame.dispose();
         });
         b2.addActionListener(e -> {});

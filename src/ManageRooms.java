@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 
-public class UserMenu {
+public class ManageRooms {
     private JTextArea printOutArea;
     private JPanel panelImg;
     private JTextField textField7;
@@ -15,8 +15,8 @@ public class UserMenu {
     private JButton editButton;
     private JButton button2;
     private JButton button3;
-    private JComboBox comboBox1;
     private JScrollPane contentPane;
+    private JTextField textField1;
 
     private void createUIComponents() throws IOException, InterruptedException {
         // TODO: place custom component creation code here
@@ -34,13 +34,17 @@ public class UserMenu {
 
         JTextAreaOutputStream out = new JTextAreaOutputStream (printOutArea);
         System.setOut (new PrintStream(out));
-        System.out.println("La vaca de to mare");
+        //Room.printRooms();
+        for (int i = 0; i < FileManager.getStaff().size(); i++) {
+            System.out.println(FileManager.getStaff().get(i));
+        }
+
 
     }
-    public static void UsrMenu() {
+    public static void RoomMenu() {
 
         JFrame f = new JFrame();
-        f.setContentPane(new UserMenu().panelImg);
+        f.setContentPane(new ManageRooms().panelImg);
 
         f.setVisible(true);
         f.setSize(1280, 800);

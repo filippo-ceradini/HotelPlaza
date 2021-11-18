@@ -5,11 +5,12 @@ public class FileManager {
     //Creating files
     File rooms = new File("Rooms.txt");
     File usernames = new File("Accounts.txt");
-    static File staffFile = new File("Staff.txt");
+    static File staffFile = new File("Staff.ser");
     ArrayList<Integer> roomsNo = new ArrayList<>();
     ArrayList<Staff> staffDB = getStaff();
 
     public static void editStaff(ArrayList<Staff> toWrite) {
+
         try {
             FileOutputStream fileOut = new FileOutputStream(staffFile);
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
@@ -65,7 +66,7 @@ public class FileManager {
     }
 
     public Room[] seeRooms() {
-        Room[] seeRooms = new Room[1000];
+        Room[] seeRooms = new Room[100];
         try {
             FileInputStream userList = new FileInputStream(rooms);
             ObjectInputStream usernamesOut = new ObjectInputStream(userList);
@@ -78,6 +79,19 @@ public class FileManager {
         return seeRooms;
     }
 
+    public static Room[] readRooms(){
+        Room[] seeRooms = new Room[9];
+        try {
+            FileInputStream userList = new FileInputStream("Rooms.txt");
+            ObjectInputStream usernamesOut = new ObjectInputStream(userList);
+            seeRooms = (Room[]) usernamesOut.readObject();
+            userList.close();
+            usernamesOut.close();
+        } catch (Exception e) {
+            System.out.println("Failed file reading");
+        }
+        return seeRooms;
+    }
     public void addUser(Guest user) {
 
         ArrayList<Guest> users = seeUsers();
