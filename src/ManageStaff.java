@@ -6,11 +6,10 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class StaffGUI {
+public class ManageStaff {
     private JCheckBox checkBox1;
     private JCheckBox checkBox2;
     private JCheckBox checkBox3;
@@ -70,7 +69,7 @@ public class StaffGUI {
     private JTextField[] salaries = {textField28, textField29, textField30, textField31, textField32, textField33, textField34, textField35, textField36};
     private JCheckBox[] checkBxes = {checkBox1, checkBox2, checkBox3, checkBox4, checkBox5, checkBox6, checkBox7, checkBox8, checkBox9};
 
-    public StaffGUI() throws IOException {
+    public ManageStaff() throws IOException {
         goback.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -85,10 +84,13 @@ public class StaffGUI {
                 for (int i = 0; i < 9; i++) {
                     if (checkBxes[i].isSelected()) {
                         System.out.println("box"+ i+" selezionato");
-                        Random rand = new Random();
-                        //System.out.println("Insert Movie ID:");
                         Staff person = new Staff(names[i].getText(), surnames[i].getText(), phones[i].getText(), salaries[i].getText());
-                        toWrite.set(i,person);
+                        try {
+                            toWrite.set(i,person);
+                        } catch (IndexOutOfBoundsException ex){
+                            ex.printStackTrace();
+                        }
+
                         cnt++;
                     }
 
@@ -154,7 +156,7 @@ public class StaffGUI {
 
         JFrame f = new JFrame();
         try {
-            f.setContentPane(new StaffGUI().panelImg);
+            f.setContentPane(new ManageStaff().panelImg);
         } catch (IOException e) {
             e.printStackTrace();
         }
