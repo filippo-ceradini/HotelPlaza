@@ -6,11 +6,11 @@ public class Room implements Serializable {
 
     private int ID;
     private int size;
-    private boolean[][][] empty = new boolean[2023][12][31];
-    private int[][][] takenBy = new int[2023][12][31];
+    private boolean[][][] empty = new boolean[3][12][31];
+    private int[][][] takenBy = new int[3][12][31];
     private int tier;
     private int price;
-    private int[][][] ticket = new int[2023][12][31];
+    private int[][][] ticket = new int[3][12][31];
 
     private static FileManager dataBase = new FileManager();
 
@@ -24,7 +24,7 @@ public class Room implements Serializable {
         storing.ID = ID;
         storing.tier = tier;
         storing.price = (size*tier);
-        for (int l = 2020; l <= 2023; l++) {
+        for (int l = 1; l < 4; l++) {
             for (int i = 0; i < 12; i++) {
                 for (int j = 0; j < 31; j++) {
                     storing.empty[l][i][j] = true;
@@ -36,8 +36,10 @@ public class Room implements Serializable {
         dataBase.addRoom(storing);
     }
 
-    public static void takeRoom(int inYear, int outYear, int inMonth, int inDay, int outMonth, int outDay, int guest, int ID) {
+    public static void takeRoom(int inYear1, int outYear1, int inMonth, int inDay, int outMonth, int outDay, int guest, int ID) {
         Room[] storing = dataBase.seeRooms();
+        int inYear = (inYear1-2020);
+        int outYear = (outYear1-2020);
         int days = 0;
         for (int l = inYear; l < outYear; l++) {
             for (int i = inMonth; i < outMonth; i++) {
@@ -67,7 +69,7 @@ public class Room implements Serializable {
     public static void seeRoomStatus(int ID) {
         Room[] storing = dataBase.seeRooms();
         boolean free = false;
-        for (int j = 2021; j < 2024; j++) {
+        for (int j = 1; j < 4; j++) {
             for (int k = 1; k < 13; k++) {
                 for (int l = 1; l < 31; l++) {
                     if (storing[ID].empty[j][k][l] == true) {
@@ -83,7 +85,7 @@ public class Room implements Serializable {
         }
         boolean inBooking = false;
         int IDUsing = 0;
-        for (int j = 2021; j < 2024; j++) {
+        for (int j = 1; j < 4; j++) {
             for (int k = 1; k < 13; k++) {
                 for (int l = 1; l < 31; l++) {
                     if (storing[ID].empty[j][k][l] == false && inBooking == false) {
@@ -140,7 +142,7 @@ public class Room implements Serializable {
             Room[] storing = dataBase.seeRooms();
             boolean inBooking = false;
             int IDUsing = 0;
-            for (int j = 2021; j < 2024; j++) {
+            for (int j = 1; j < 4; j++) {
                 for (int k = 1; k < 13; k++) {
                     for (int l = 1; l < 31; l++) {
                         if (storing[ID].takenBy[j][k][l] == guestID && inBooking == false) {
@@ -172,7 +174,9 @@ public class Room implements Serializable {
         }
     }
 
-    public static void availableBySize(int size, int fromYear, int untilYear, int fromMonth, int fromDay, int untilMonth, int untilDay) {
+    public static void availableBySize(int size, int fromYear1, int untilYear1, int fromMonth, int fromDay, int untilMonth, int untilDay) {
+        int fromYear = (fromYear1-2020);
+        int untilYear = (untilYear1-2020);
         Room[] storing = dataBase.seeRooms();
         ArrayList<Room> storing1 = new ArrayList<>();
         for (int i = 0; i < dataBase.roomsNo.size(); i++) {
@@ -199,7 +203,9 @@ public class Room implements Serializable {
         }
     }
 
-    public static void availableByTier(int tier, int fromYear, int untilYear, int fromMonth, int fromDay, int untilMonth, int untilDay) {
+    public static void availableByTier(int tier, int fromYear1, int untilYear1, int fromMonth, int fromDay, int untilMonth, int untilDay) {
+        int fromYear = (fromYear1-2020);
+        int untilYear = (untilYear1-2020);
         Room[] storing = dataBase.seeRooms();
         ArrayList<Room> storing1 = new ArrayList<>();
         for (int i = 0; i < dataBase.roomsNo.size(); i++) {
@@ -226,7 +232,9 @@ public class Room implements Serializable {
         }
     }
 
-    public static void availableByPrice(int fromPrice, int untilPrice, int fromYear, int untilYear, int fromMonth, int fromDay, int untilMonth, int untilDay) {
+    public static void availableByPrice(int fromPrice, int untilPrice, int fromYear1, int untilYear1, int fromMonth, int fromDay, int untilMonth, int untilDay) {
+        int fromYear = (fromYear1-2020);
+        int untilYear = (untilYear1-2020);
         Room[] storing = dataBase.seeRooms();
         ArrayList<Room> storing1 = new ArrayList<>();
         for (int i = 0; i < dataBase.roomsNo.size(); i++) {
@@ -253,7 +261,9 @@ public class Room implements Serializable {
         }
     }
 
-    public static void availableByDate(int fromYear, int untilYear, int fromMonth, int fromDay, int untilMonth, int untilDay) {
+    public static void availableByDate(int fromYear1, int untilYear1, int fromMonth, int fromDay, int untilMonth, int untilDay) {
+        int fromYear = (fromYear1-2020);
+        int untilYear = (untilYear1-2020);
         Room[] storing = dataBase.seeRooms();
         for (int q = 0; q < dataBase.roomsNo.size(); q++) {
             boolean free = false;
@@ -274,8 +284,10 @@ public class Room implements Serializable {
         }
     }
 
-    public static void cancelBooking(int inYear, int outYear, int inMonth, int inDay, int outMonth, int outDay, int guest, int ID)
+    public static void cancelBooking(int inYear1, int outYear1, int inMonth, int inDay, int outMonth, int outDay, int guest, int ID)
     {
+        int inYear = (inYear1-2020);
+        int outYear = (outYear1-2020);
         Room[] storing = dataBase.seeRooms();
         for (int l = inYear; l < outYear; l++) {
             for (int i = inMonth; i < outMonth; i++) {
