@@ -4,6 +4,14 @@ import java.util.ArrayList;
 public class Run {
     public static void main(String[] args) throws IOException {
 
+        easy2.easy();
+
+        ManageStaff.manageStaffe();
+        //ManageStaff.ManageStaffe();
+        //ManageRooms.MenuRooms();
+        //GUI.login();
+//ManageStaff.ManageStaff();
+        //This in case we lose the Staff.txt
         /*ArrayList<Staff> toWrite = new ArrayList<>();
         Staff person = new Staff("Jonathan", "Bomber", "12345678", "100.000");
 
@@ -11,20 +19,6 @@ public class Run {
             toWrite.add(i, person);
         }
         FileManager.editStaff(toWrite);*/
-
-        //ManageStaff.ManageStaff();
-        //GUI.login();
-        /*Room.createRoom(1,1,500);
-        Room.createRoom(2,2,500);
-        Room.createRoom(3,3,1000);
-        Room.createRoom(4,4,1500);
-        Room.createRoom(1,5,500);
-*/
-        //Room.RandomRooms();
-
-        //Room.printRooms();
-
-        ManageRooms.RoomMenu();
     }
 
 }

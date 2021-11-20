@@ -4,11 +4,12 @@ import javax.swing.JFrame;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class GUI extends Canvas {
+public class GUI extends ManageRooms{
 
     //Creates the login initial page
 
@@ -118,10 +119,14 @@ public class GUI extends Canvas {
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         b1.addActionListener(e -> {
-            ManageStaff.ManageStaff();
-            frame.dispose();
+
         });
-        b2.addActionListener(e -> {});
+        b2.addActionListener(e -> {
+            ManageRooms.MenuRooms();
+
+
+
+        });
         b3.addActionListener(e -> {
             try {
                 GUI.login();
@@ -142,5 +147,4 @@ public class GUI extends Canvas {
 
 
     }
-
 }

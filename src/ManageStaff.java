@@ -1,15 +1,20 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 
-public class ManageStaff {
+
+public class ManageStaff extends JFrame {
+    private JButton goBack;
+    private JButton viewDataButton;
+    private JButton update;
+    private JPanel mngPanel;
+
+
     private JCheckBox checkBox1;
     private JCheckBox checkBox2;
     private JCheckBox checkBox3;
@@ -21,9 +26,6 @@ public class ManageStaff {
     private JCheckBox checkBox9;
 
 
-    private JButton goback;
-    private JButton update;
-    private JPanel panelImg;
     private JTextField textField1;
     private JTextField textField2;
     private JTextField textField3;
@@ -60,62 +62,44 @@ public class ManageStaff {
     private JTextField textField34;
     private JTextField textField35;
     private JTextField textField36;
-    private JButton viewDataButton;
 
 
-    private JTextField[] names = {textField1, textField2, textField3, textField4, textField5, textField6, textField7, textField8, textField9};
-    private JTextField[] surnames = {textField10, textField11, textField12, textField13, textField14, textField15, textField16, textField17, textField18};
-    private JTextField[] phones = {textField19, textField20, textField21, textField22, textField23, textField24, textField25, textField26, textField27};
-    private JTextField[] salaries = {textField28, textField29, textField30, textField31, textField32, textField33, textField34, textField35, textField36};
-    private JCheckBox[] checkBxes = {checkBox1, checkBox2, checkBox3, checkBox4, checkBox5, checkBox6, checkBox7, checkBox8, checkBox9};
+    private final JTextField[] names = {textField1, textField2, textField3, textField4, textField5, textField6, textField7, textField8, textField9};
+    private final JTextField[] surnames = {textField10, textField11, textField12, textField13, textField14, textField15, textField16, textField17, textField18};
+    private final JTextField[] phones = {textField19, textField20, textField21, textField22, textField23, textField24, textField25, textField26, textField27};
+    private final JTextField[] salaries = {textField28, textField29, textField30, textField31, textField32, textField33, textField34, textField35, textField36};
+    private final JCheckBox[] checkBxes = {checkBox1, checkBox2, checkBox3, checkBox4, checkBox5, checkBox6, checkBox7, checkBox8, checkBox9};
 
-    public ManageStaff() throws IOException {
-        goback.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+    public ManageStaff() {
 
-            }
-        });
-        update.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ArrayList<Staff> toWrite= FileManager.getStaff();
-                int cnt =0;
-                for (int i = 0; i < 9; i++) {
-                    if (checkBxes[i].isSelected()) {
-                        System.out.println("box"+ i+" selezionato");
-                        Staff person = new Staff(names[i].getText(), surnames[i].getText(), phones[i].getText(), salaries[i].getText());
-                        try {
-                            toWrite.set(i,person);
-                        } catch (IndexOutOfBoundsException ex){
-                            ex.printStackTrace();
-                        }
+        goBack.addActionListener(e -> this.dispose());
 
-                        cnt++;
+        update.addActionListener(e -> {
+            ArrayList<Staff> toWrite = FileManager.getStaff();
+            int cnt = 0;
+            for (int i = 0; i < 9; i++) {
+                if (checkBxes[i].isSelected()) {
+                    System.out.println("box" + i + " selezionato");
+                    Staff person = new Staff(names[i].getText(), surnames[i].getText(), phones[i].getText(), salaries[i].getText());
+                    try {
+                        toWrite.set(i, person);
+                    } catch (IndexOutOfBoundsException ex) {
+                        ex.printStackTrace();
                     }
 
+                    cnt++;
                 }
-                if (cnt>0){FileManager.editStaff(toWrite);}
-            }
-        });
-        viewDataButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                viewData();
-            }
-        });
-        checkBox1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
             }
+            if (cnt > 0) {FileManager.editStaff(toWrite);}
         });
-        ActionListener listener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
+        viewDataButton.addActionListener(e -> viewData());
+
+        ActionListener listener = e -> {
+
         };
+        checkBox1.addActionListener(listener);
         checkBox2.addActionListener(listener);
         checkBox3.addActionListener(listener);
         checkBox4.addActionListener(listener);
@@ -125,6 +109,10 @@ public class ManageStaff {
         checkBox8.addActionListener(listener);
         checkBox9.addActionListener(listener);
 
+        this.setContentPane(mngPanel);
+        this.setSize(1280, 800);
+        this.setResizable(true);
+        this.setLocationRelativeTo(null);
 
     }
 
@@ -139,11 +127,15 @@ public class ManageStaff {
 
     }
 
+    public static void manageStaffe(){
+        JFrame f = new ManageStaff();
+        f.setVisible(true);
+    }
+
     private void createUIComponents() throws IOException {
         // TODO: place custom component creation code here
-
         final BufferedImage image = ImageIO.read(new File("background.jpg"));
-        panelImg = new JPanel() {
+        mngPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -151,23 +143,4 @@ public class ManageStaff {
             }
         };
     }
-
-    public static void ManageStaff() {
-
-        JFrame f = new JFrame();
-        try {
-            f.setContentPane(new ManageStaff().panelImg);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        f.setVisible(true);
-        f.setSize(1280, 800);
-        f.setResizable(true);
-        f.setLocationRelativeTo(null);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setVisible(true);
-
-    }
-
 }
