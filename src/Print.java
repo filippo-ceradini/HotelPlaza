@@ -11,7 +11,7 @@ public class Print {
     public static void test(){
         for (Room r: FileManager.readRooms()
     ) {
-        System.out.println(r.toString()+"\n");
+        System.out.println(r.toString()+"");
     }}
 
 

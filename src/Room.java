@@ -57,6 +57,24 @@ public class Room implements Serializable {
         dataBase.addRoom(storing);
     }
 
+    public static void editRoom(int size, int tier, int ID) {
+        Room storing = new Room();
+        storing.size = size;
+        storing.ID = ID;
+        storing.tier = tier;
+        storing.price = (size*tier);
+        for (int l = 1; l < 3; l++) {
+            for (int i = 0; i < 12; i++) {
+                for (int j = 0; j < 31; j++) {
+                    storing.empty[l][i][j] = true;
+                    storing.takenBy[l][i][j] = 0;
+                    storing.ticket[l][i][j] = 0;
+                }
+            }
+        }
+        dataBase.addRoom(storing);
+    }
+
     public static void takeRoom(int inYear1, int outYear1, int inMonth, int inDay, int outMonth, int outDay, int guest, int ID) {
         Room[] storing = dataBase.seeRooms();
         int inYear = (inYear1-2020);

@@ -10,11 +10,14 @@ public class Run {
     public static void main(String[] args) throws IOException {
 
 
-        // GUI.login();
+        //GUI.login();
 
 
         //Used to create new rooms for testing
         ManageRooms.menuRooms();
+        //ManageStaff.manageStaffe();
+
+
 
         /*
         Room[] rooms = new Room[100];
@@ -32,15 +35,16 @@ public class Run {
         } catch (Exception e) {
             System.out.println("Failed file writing");
         }
-        Print.testPrintRooms();
+        Print.testPrintRooms();*/
         //This in case we lose the Staff.txt
-        /*ArrayList<Staff> toWrite = new ArrayList<>();
-        Staff person = new Staff("Jonathan", "Bomber", "12345678", "100.000");
 
+        /*ArrayList<Staff> toWrite = new ArrayList<>();
+        Staff person = new Staff("Jonathan", "Bomber", "12345678", "100.000", "cacca");
         for (int i = 0; i < 10; i++) {
             toWrite.add(i, person);
         }
         FileManager.editStaff(toWrite);*/
+
     }
 
 }

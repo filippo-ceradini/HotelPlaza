@@ -62,12 +62,24 @@ public class ManageStaff extends JFrame {
     private JTextField textField34;
     private JTextField textField35;
     private JTextField textField36;
+    private JPasswordField passwordField1;
+    private JPasswordField passwordField2;
+    private JPasswordField passwordField3;
+    private JPasswordField passwordField4;
+    private JPasswordField passwordField5;
+    private JPasswordField passwordField6;
+    private JPasswordField passwordField7;
+    private JPasswordField passwordField8;
+    private JPasswordField passwordField9;
+    private JLabel password;
+    private JLabel title;
 
 
     private final JTextField[] names = {textField1, textField2, textField3, textField4, textField5, textField6, textField7, textField8, textField9};
     private final JTextField[] surnames = {textField10, textField11, textField12, textField13, textField14, textField15, textField16, textField17, textField18};
     private final JTextField[] phones = {textField19, textField20, textField21, textField22, textField23, textField24, textField25, textField26, textField27};
     private final JTextField[] salaries = {textField28, textField29, textField30, textField31, textField32, textField33, textField34, textField35, textField36};
+    private final JTextField[] passwords = {passwordField1, passwordField2, passwordField3, passwordField4, passwordField5, passwordField6, passwordField7, passwordField8, passwordField9};
     private final JCheckBox[] checkBxes = {checkBox1, checkBox2, checkBox3, checkBox4, checkBox5, checkBox6, checkBox7, checkBox8, checkBox9};
 
     public ManageStaff() {
@@ -80,17 +92,17 @@ public class ManageStaff extends JFrame {
             for (int i = 0; i < 9; i++) {
                 if (checkBxes[i].isSelected()) {
                     System.out.println("box" + i + " selezionato");
-                    Staff person = new Staff(names[i].getText(), surnames[i].getText(), phones[i].getText(), salaries[i].getText());
+                    Staff person = new Staff(names[i].getText(), surnames[i].getText(), phones[i].getText(), salaries[i].getText(), passwords[i].getText());
                     try {
                         toWrite.set(i, person);
                     } catch (IndexOutOfBoundsException ex) {
                         ex.printStackTrace();
+                        System.out.println("Failed to write object");
                     }
-
                     cnt++;
                 }
-
             }
+            System.out.println(toWrite);
             if (cnt > 0) {FileManager.editStaff(toWrite);}
         });
 
@@ -108,7 +120,7 @@ public class ManageStaff extends JFrame {
         checkBox7.addActionListener(listener);
         checkBox8.addActionListener(listener);
         checkBox9.addActionListener(listener);
-
+        viewData();
         this.setContentPane(mngPanel);
         this.setSize(1280, 800);
         this.setResizable(true);
@@ -123,11 +135,12 @@ public class ManageStaff extends JFrame {
             surnames[i].setText(FileManager.getStaff().get(i).getSurname());
             phones[i].setText(FileManager.getStaff().get(i).getPhone());
             salaries[i].setText(FileManager.getStaff().get(i).getSalary());
+            passwords[i].setText(FileManager.getStaff().get(i).getPassword());
         }
 
     }
 
-    public static void manageStaffe(){
+    public static void manageStaffe() {
         JFrame f = new ManageStaff();
         f.setVisible(true);
     }

@@ -10,19 +10,19 @@ import java.io.PrintStream;
 public class ManageRooms extends JFrame{
     private JTextArea printOutArea;
     private JPanel panelImg;
-    private JTextField textField7;
-    private JTextField textField8;
-    private JTextField textField9;
+    private JTextField editSize;
+    private JTextField editTier;
     private JButton editButton;
     private JButton goBack;
     private JScrollPane contentPane;
-    private JTextField textField1;
+    private JTextField ediRoomNr;
 
     public ManageRooms() {
         goBack.addActionListener(e ->this.dispose());
         editButton.addActionListener(e -> {
-            Print.test();
+
         });
+
         this.setContentPane(panelImg);
         this.setSize(1280, 800);
         this.setResizable(false);
@@ -41,6 +41,7 @@ public class ManageRooms extends JFrame{
 
         JFrame m =new ManageRooms();
         m.setVisible(true);
+        Print.test();
 
     }
     private void createUIComponents() throws IOException, InterruptedException {
