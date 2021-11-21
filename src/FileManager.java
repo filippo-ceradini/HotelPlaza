@@ -80,7 +80,7 @@ public class FileManager {
     }
 
     public static Room[] readRooms(){
-        Room[] seeRooms = new Room[9];
+        Room[] seeRooms = new Room[100];
         try {
             FileInputStream userList = new FileInputStream("Rooms.txt");
             ObjectInputStream usernamesOut = new ObjectInputStream(userList);
@@ -121,7 +121,7 @@ public class FileManager {
     }*/
 
     public ArrayList<Guest> seeUsers() {
-        ArrayList<Guest> users = new ArrayList<>();
+        ArrayList<Guest> users = new ArrayList<>();//
         try {
             FileInputStream userList = new FileInputStream(usernames);
             ObjectInputStream usernamesOut = new ObjectInputStream(userList);

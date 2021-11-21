@@ -5,14 +5,35 @@ import java.util.ArrayList;
 public class Room implements Serializable {
 
     private int ID;
+
+    public Room(int ID, int size, int tier) {
+        this.ID = ID;
+        this.size = size;
+        this.tier = tier;
+    }
+
     private int size;
     private boolean[][][] empty = new boolean[3][12][31];
+
+    @Override
+    public String toString() {
+        return "Room Number "+ ID +
+                ", size=" + size +
+                ", tier=" + tier +
+                ", price=" + tier*500 +
+                '}';
+    }
+
     private int[][][] takenBy = new int[3][12][31];
     private int tier;
     private int price;
     private int[][][] ticket = new int[3][12][31];
 
     private static FileManager dataBase = new FileManager();
+
+    public Room() {
+
+    }
 
     public int getID() {
         return ID;
@@ -24,7 +45,7 @@ public class Room implements Serializable {
         storing.ID = ID;
         storing.tier = tier;
         storing.price = (size*tier);
-        for (int l = 1; l < 4; l++) {
+        for (int l = 1; l < 3; l++) {
             for (int i = 0; i < 12; i++) {
                 for (int j = 0; j < 31; j++) {
                     storing.empty[l][i][j] = true;
@@ -308,7 +329,7 @@ public class Room implements Serializable {
         }else if(tier == 2)
         {
             return "normal";
-        }else
+        }else if(tier == 3);
         {
             return "luxury";
         }

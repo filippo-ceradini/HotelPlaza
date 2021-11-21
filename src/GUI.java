@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class GUI extends ManageRooms{
+public class GUI {
 
     //Creates the login initial page
 
@@ -34,9 +34,9 @@ public class GUI extends ManageRooms{
         final JPasswordField passw = new JPasswordField();
         final JTextField login = new JTextField();
 
-        header.setBounds(150,150,1200,50);
+        header.setBounds(150, 150, 1200, 50);
         header.setForeground(Color.white);
-        header.setFont(new Font("Royal King", Font.PLAIN,60));
+        header.setFont(new Font("Royal King", Font.PLAIN, 60));
         l1.setBounds(centerx + 20, centery + 20, 80, 30);
         l1.setForeground(Color.white);
         l2.setBounds(centerx + 20, centery + 75, 80, 30);
@@ -61,8 +61,8 @@ public class GUI extends ManageRooms{
             data += ", Password: "
                     + new String(passw.getPassword());
             label.setText(data);*/
-            if (login.getText().equals("admin")){
-                    System.out.println("cazzone");
+            if (login.getText().equals("admin")) {
+                System.out.println("cazzone");
                 try {
                     GUI.admin();
                     frame.dispose();
@@ -79,7 +79,7 @@ public class GUI extends ManageRooms{
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        if (login.getText().equals("admin")){
+        if (login.getText().equals("admin")) {
             try {
                 frame.setVisible(false);
                 GUI.admin();
@@ -119,13 +119,10 @@ public class GUI extends ManageRooms{
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         b1.addActionListener(e -> {
-
+            ManageStaff.manageStaffe();
         });
         b2.addActionListener(e -> {
-            ManageRooms.MenuRooms();
-
-
-
+            ManageRooms.menuRooms();
         });
         b3.addActionListener(e -> {
             try {
@@ -135,16 +132,11 @@ public class GUI extends ManageRooms{
                 ex.printStackTrace();
             }
         });
-
-
-
         //frame.setLayout(new FlowLayout());
         frame.add(pane);
         frame.setSize(1280, 800);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-
-
     }
 }
