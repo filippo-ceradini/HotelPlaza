@@ -103,7 +103,14 @@ public class ManageStaff extends JFrame {
                 }
             }
             System.out.println(toWrite);
-            if (cnt > 0) {FileManager.editStaff(toWrite);}
+            try {
+                if (cnt > 0) {FileManager.editStaff(toWrite);}
+                JOptionPane.showMessageDialog(null, "Staff successfuly edited!");
+            } catch (Exception d){
+                JOptionPane.showMessageDialog(null, "Something went wrong");
+            }
+
+
         });
 
         viewDataButton.addActionListener(e -> viewData());

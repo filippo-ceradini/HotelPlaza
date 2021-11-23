@@ -6,9 +6,8 @@ public class Run {
 
     public static void main(String[] args) throws IOException {
 
-        BookingsMenu.ManageBookings();
 
-        //GUI.login();
+        GUI.login();
 
 
         //Used to create new rooms for testing

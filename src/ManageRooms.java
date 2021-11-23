@@ -16,6 +16,7 @@ public class ManageRooms extends JFrame {
     private JButton goBack;
     private JScrollPane contentPane;
     private JTextField ediRoomNr;
+    private JTextField textField1;
     private JButton button1;
 
     public ManageRooms() {

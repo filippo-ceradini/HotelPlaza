@@ -26,7 +26,13 @@ public class UserMenu extends JFrame {
 
     public UserMenu() {
 
-        goBack.addActionListener(e -> this.dispose());
+        goBack.addActionListener(e -> {
+            try {
+                GUI.login();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            this.dispose();});
         ManageBookings.addActionListener(e -> {});
         changeDate.addActionListener(e -> {
 
@@ -36,7 +42,8 @@ public class UserMenu extends JFrame {
             this.dispose();
         });
         manageGuestsButton.addActionListener(e -> {
-
+            MGuestMenu.menuGuest();
+            this.dispose();
         });
 
         this.setContentPane(panelImg);
