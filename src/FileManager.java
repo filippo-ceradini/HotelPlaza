@@ -79,7 +79,7 @@ public class FileManager {
         return seeRooms;
     }
 
-    public static Room[] readRooms(){
+    public static Room[] seeRoomsStatic(){
         Room[] seeRooms = new Room[100];
         try {
             FileInputStream userList = new FileInputStream("Rooms.txt");

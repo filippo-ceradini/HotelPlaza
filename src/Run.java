@@ -1,26 +1,24 @@
-import java.io.FileOutputStream;
+
+
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.Random;
 
 public class Run {
 
     public static void main(String[] args) throws IOException {
 
+        BookingsMenu.ManageBookings();
 
         //GUI.login();
 
 
         //Used to create new rooms for testing
-        ManageRooms.menuRooms();
+
         //ManageStaff.manageStaffe();
 
 
 
-        /*
-        Room[] rooms = new Room[100];
+
+        /*Room[] rooms = new Room[100];
         for (int i = 0; i < 100; i++) {
             Random rand = new Random();
             Room barnaba = new Room(i, rand.nextInt(3) + 1, (rand.nextInt(3) + 1));
@@ -36,6 +34,7 @@ public class Run {
             System.out.println("Failed file writing");
         }
         Print.testPrintRooms();*/
+        //ManageRooms.menuRooms();
         //This in case we lose the Staff.txt
 
         /*ArrayList<Staff> toWrite = new ArrayList<>();

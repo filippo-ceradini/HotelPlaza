@@ -1,27 +1,41 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 
 
-public class ManageRooms extends JFrame {
+public class UserMenu extends JFrame {
     private JTextArea printOutArea;
     private JPanel panelImg;
-    private JTextField editSize;
-    private JTextField editTier;
-    private JButton editButton;
+    private JButton ManageBookings;
     private JButton goBack;
     private JScrollPane contentPane;
-    private JTextField ediRoomNr;
-    private JButton button1;
+    private JButton changeDate;
+    private JTextField dayFrom;
+    private JTextField monthFrom;
+    private JTextField yearFrom;
+    private JTextField dayTo;
+    private JTextField monthTo;
+    private JTextField yearTo;
+    private JButton manageGuestsButton;
 
-    public ManageRooms() {
+    public UserMenu() {
+
         goBack.addActionListener(e -> this.dispose());
-        editButton.addActionListener(e -> {
+        ManageBookings.addActionListener(e -> {});
+        changeDate.addActionListener(e -> {
 
+        });
+        ManageBookings.addActionListener(e -> {
+            BookingsMenu.ManageBookings();
+            this.dispose();
+        });
+        manageGuestsButton.addActionListener(e -> {
 
         });
 
@@ -30,6 +44,7 @@ public class ManageRooms extends JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
 
     public String printRooms() {
@@ -40,13 +55,13 @@ public class ManageRooms extends JFrame {
         return data;
     }
 
-    public static void menuRooms() {
+    public static void UserMenu() {
 
-        JFrame m = new ManageRooms();
+        JFrame m = new UserMenu();
         m.setVisible(true);
         Print.test();
-
     }
+
 
     private void createUIComponents() throws IOException, InterruptedException {
         // TODO: place custom component creation code here

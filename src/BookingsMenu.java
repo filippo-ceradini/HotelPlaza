@@ -7,21 +7,38 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 
-public class ManageRooms extends JFrame {
+public class BookingsMenu extends JFrame {
     private JTextArea printOutArea;
     private JPanel panelImg;
-    private JTextField editSize;
-    private JTextField editTier;
-    private JButton editButton;
+
     private JButton goBack;
     private JScrollPane contentPane;
-    private JTextField ediRoomNr;
-    private JButton button1;
+    private JButton changeDate;
+    private JTextField dayFrom;
+    private JTextField monthFrom;
+    private JTextField yearFrom;
+    private JTextField dayTo;
+    private JTextField monthTo;
+    private JTextField yearTo;
+    private JButton addNew;
+    private JTextField guestTextField;
+    private JTextField roomTextField;
+    private JTextField a12TextField1;
+    private JTextField a11TextField;
+    private JTextField a2021TextField;
+    private JTextField a12TextField;
+    private JTextField a1TextField;
+    private JTextField a2022TextField;
+    private JTextField textField1;
 
-    public ManageRooms() {
+    public BookingsMenu() {
+
         goBack.addActionListener(e -> this.dispose());
-        editButton.addActionListener(e -> {
+        changeDate.addActionListener(e -> {
 
+        });
+
+        addNew.addActionListener(e -> {
 
         });
 
@@ -30,6 +47,7 @@ public class ManageRooms extends JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
 
     public String printRooms() {
@@ -40,13 +58,13 @@ public class ManageRooms extends JFrame {
         return data;
     }
 
-    public static void menuRooms() {
+    public static void ManageBookings() {
 
-        JFrame m = new ManageRooms();
+        JFrame m = new BookingsMenu();
         m.setVisible(true);
         Print.test();
-
     }
+
 
     private void createUIComponents() throws IOException, InterruptedException {
         // TODO: place custom component creation code here
