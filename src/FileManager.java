@@ -39,9 +39,7 @@ public class FileManager {
     public void addRoom(Room newRoom) {
         Room[] writeRooms = seeRooms();
         writeRooms[newRoom.getID()] = newRoom;
-        System.out.println(writeRooms[newRoom.getID()]);
         roomsNo.add(newRoom.getID());
-        System.out.println(roomsNo.get(0));
         try {
             FileOutputStream addRoom = new FileOutputStream(rooms);
             ObjectOutputStream usernamesIN = new ObjectOutputStream(addRoom);
