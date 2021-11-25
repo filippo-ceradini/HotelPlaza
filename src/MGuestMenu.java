@@ -1,27 +1,44 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.InputMethodEvent;
+import java.awt.event.InputMethodListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 
 
-public class ManageRooms extends JFrame {
+public class MGuestMenu extends JFrame {
     private JTextArea printOutArea;
     private JPanel panelImg;
     private JTextField editSize;
     private JTextField editTier;
-    private JButton editButton;
+    private JButton AddGuest;
     private JButton goBack;
     private JScrollPane contentPane;
-    private JTextField ediRoomNr;
     private JTextField textField1;
+    private JTextField textField2;
+    private JTextField textField3;
+    private JTextField textField4;
+    private JTextField textField5;
+    private JTextField textField6;
+    private JTextField textField7;
+    private JTextField textField8;
+    private JButton editGuestButton;
+    private JButton deleteGuestButton;
+    private JTextField delGuestID;
+    private JTextField delGuestName;
+    private JTextField delGuestSurname;
+    private JTextField textField12;
+    private JTextField textField13;
     private JButton button1;
 
-    public ManageRooms() {
-        goBack.addActionListener(e -> this.dispose());
-        editButton.addActionListener(e -> {
+    public MGuestMenu() {
+        goBack.addActionListener(e -> {UserMenu.UserMenu();this.dispose(); });
+        AddGuest.addActionListener(e -> {
 
 
         });
@@ -31,6 +48,23 @@ public class ManageRooms extends JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        AddGuest.addActionListener(e -> {
+            JOptionPane.showMessageDialog(null, "Guest Added");
+        });
+        editGuestButton.addActionListener(e -> {
+            JOptionPane.showMessageDialog(null, "Guest Deleted");
+        });
+        deleteGuestButton.addActionListener(e -> {
+            JOptionPane.showMessageDialog(null, "Are you sure you want to delete?");
+        });
+
+        delGuestID.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                delGuestName.setText("billy");
+                delGuestSurname.setText("Ballo");
+            }
+        });
     }
 
     public String printRooms() {
@@ -41,9 +75,9 @@ public class ManageRooms extends JFrame {
         return data;
     }
 
-    public static void menuRooms() {
+    public static void menuGuest() {
 
-        JFrame m = new ManageRooms();
+        JFrame m = new MGuestMenu();
         m.setVisible(true);
         Print.test();
 

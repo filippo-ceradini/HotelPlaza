@@ -16,7 +16,7 @@ public class Run {
         Room.allRoomsStatus();
 
 
-        //GUI.login();
+        GUI.login();
 
 
         //Used to create new rooms for testing
@@ -25,8 +25,8 @@ public class Run {
 
 
 
-        /*
-        Room[] rooms = new Room[100];
+
+        /*Room[] rooms = new Room[100];
         for (int i = 0; i < 100; i++) {
             Random rand = new Random();
             Room barnaba = new Room(i, rand.nextInt(3) + 1, (rand.nextInt(3) + 1));
@@ -42,6 +42,7 @@ public class Run {
             System.out.println("Failed file writing");
         }
         Print.testPrintRooms();*/
+        //ManageRooms.menuRooms();
         //This in case we lose the Staff.txt
 
         /*ArrayList<Staff> toWrite = new ArrayList<>();

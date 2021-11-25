@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class GUI {
 
@@ -31,7 +32,7 @@ public class GUI {
         JLabel l1 = new JLabel("Username:");
         JLabel l2 = new JLabel("Password:");
         JButton b = new JButton("Login");
-        final JPasswordField passw = new JPasswordField();
+        final JPasswordField passwordField = new JPasswordField();
         final JTextField login = new JTextField();
 
         header.setBounds(150, 150, 1200, 50);
@@ -42,7 +43,7 @@ public class GUI {
         l2.setBounds(centerx + 20, centery + 75, 80, 30);
         l2.setForeground(Color.white);
         login.setBounds(centerx + 100, centery + 20, 100, 30);
-        passw.setBounds(centerx + 100, centery + 75, 100, 30);
+        passwordField.setBounds(centerx + 100, centery + 75, 100, 30);
         b.setBounds(centerx + 100, centery + 120, 80, 30);
         label.setBounds(centerx + 20, centery + 170, 200, 50);
         label.setForeground(Color.white);
@@ -50,27 +51,43 @@ public class GUI {
         frame.add(header);
         frame.add(b);
         frame.add(login);
-        frame.add(passw);
+        frame.add(passwordField);
         frame.add(l1);
         frame.add(label);
         frame.add(l2);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         b.addActionListener(e -> {
-            /*String data = "Username " + login.getText();
-            data += ", Password: "
-                    + new String(passw.getPassword());
-            label.setText(data);*/
-            if (login.getText().equals("admin")) {
-                System.out.println("cazzone");
-                try {
-                    GUI.admin();
-                    frame.dispose();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
+            String adminpsw = "admin";
+            char[] input = passwordField.getPassword();
+            char[] adminps = adminpsw.toCharArray();
+            boolean isCorrect = Arrays.equals(adminps, input);
+
+            if (isCorrect && adminpsw.equals(login.getText())) {
+
+                    try {
+                        GUI.admin();
+                        frame.dispose();
+                        JOptionPane.showMessageDialog(null, "Welcome venerable Admin");
+
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+
+            } else if (login.getText() != null){
+                for (Staff f:FileManager.getStaff()
+                     ) {
+                    String username = f.getName()+"."+f.getSurname();
+                    if (username.equals(login.getText())&& Arrays.equals(f.getPassword().toCharArray(), input)){
+                        UserMenu.UserMenu();
+                        frame.dispose();
+                        JOptionPane.showMessageDialog(null, "Welcome "+f.getName());
+                    }
                 }
-                System.out.println("accade dopo");
+            } else {
+                JOptionPane.showMessageDialog(null, "Could not find User\n Try again");
             }
+
         });
 
         //frame.setLayout(new FlowLayout());
@@ -79,16 +96,8 @@ public class GUI {
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        if (login.getText().equals("admin")) {
-            try {
-                frame.setVisible(false);
-                GUI.admin();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-
     }
+
 
     public static void admin() throws IOException {
         JFrame frame = new JFrame();
