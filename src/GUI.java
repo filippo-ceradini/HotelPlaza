@@ -4,7 +4,6 @@ import javax.swing.JFrame;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -32,6 +31,8 @@ public class GUI {
         JLabel l1 = new JLabel("Username:");
         JLabel l2 = new JLabel("Password:");
         JButton b = new JButton("Login");
+        JButton Guest = new JButton("Guest Login");
+        JButton newGuest = new JButton("New Guest");
         final JPasswordField passwordField = new JPasswordField();
         final JTextField login = new JTextField();
 
@@ -44,12 +45,16 @@ public class GUI {
         l2.setForeground(Color.white);
         login.setBounds(centerx + 100, centery + 20, 100, 30);
         passwordField.setBounds(centerx + 100, centery + 75, 100, 30);
-        b.setBounds(centerx + 100, centery + 120, 80, 30);
+        b.setBounds(centerx + 70, centery + 120, 80, 30);
+        Guest.setBounds(centerx + 150, centery + 120, 100, 30);
+        newGuest.setBounds(centerx + 150, centery + 160, 100, 30);
         label.setBounds(centerx + 20, centery + 170, 200, 50);
         label.setForeground(Color.white);
 
         frame.add(header);
         frame.add(b);
+        frame.add(Guest);
+        frame.add(newGuest);
         frame.add(login);
         frame.add(passwordField);
         frame.add(l1);
@@ -65,29 +70,36 @@ public class GUI {
 
             if (isCorrect && adminpsw.equals(login.getText())) {
 
-                    try {
-                        GUI.admin();
-                        frame.dispose();
-                        JOptionPane.showMessageDialog(null, "Welcome venerable Admin");
+                try {
+                    GUI.admin();
+                    frame.dispose();
+                    JOptionPane.showMessageDialog(null, "Welcome venerable Admin");
 
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
 
-            } else if (login.getText() != null){
-                for (Staff f:FileManager.getStaff()
-                     ) {
-                    String username = f.getName()+"."+f.getSurname();
-                    if (username.equals(login.getText())&& Arrays.equals(f.getPassword().toCharArray(), input)){
+            } else if (!login.getText().equals("admin")) {
+                for (Staff f : FileManager.getStaff()
+                ) {
+                    String username = f.getName() + "." + f.getSurname();
+                    if (username.equalsIgnoreCase(login.getText()) && Arrays.equals(f.getPassword().toCharArray(), input)) {
                         UserMenu.UserMenu();
                         frame.dispose();
-                        JOptionPane.showMessageDialog(null, "Welcome "+f.getName());
+                        JOptionPane.showMessageDialog(null, "Welcome " + f.getName());
                     }
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Could not find User\n Try again");
             }
 
+        });
+        Guest.addActionListener(e -> {
+            GuestMenu.GuestMenue();
+        });
+
+        newGuest.addActionListener(e -> {
+            GuestGUI.GuestGUI();
         });
 
         //frame.setLayout(new FlowLayout());
@@ -115,25 +127,25 @@ public class GUI {
 
         JButton b1 = new JButton("Manage Staff");
         JButton b2 = new JButton("Manage Rooms");
-        JButton b3 = new JButton("Back");
+        JButton back = new JButton("Back");
 
         b1.setBounds(150, 120, 200, 30);
         b2.setBounds(150, 180, 200, 30);
-        b3.setBounds(150, 240, 200, 30);
+        back.setBounds(150, 240, 200, 30);
 
         frame.add(b1);
         frame.add(b2);
-        frame.add(b3);
+        frame.add(back);
 
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         b1.addActionListener(e -> {
-            ManageStaff.manageStaffe();
+            AdManageStaff.manageStaffe();
         });
         b2.addActionListener(e -> {
-            ManageRooms.menuRooms();
+            AdManageRooms.menuRooms();
         });
-        b3.addActionListener(e -> {
+        back.addActionListener(e -> {
             try {
                 GUI.login();
                 frame.dispose();
@@ -148,4 +160,9 @@ public class GUI {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
+
+    public static void Diag(String message){
+        JOptionPane.showMessageDialog(null, message);
+    }
 }
+
