@@ -78,7 +78,7 @@ public class Room implements Serializable {
         int inYear = (inYear1 - 2020);
         int outYear = (outYear1 - 2020);
         int days = 0;
-        if ((outYear - inYear) > 0) {
+        //if ((outYear - inYear) > 0) {
             for (int l = inYear; l <= outYear; l++) {
                 if ((outMonth - inMonth) > 0) {
                     for (int i = inMonth; i <= inMonth; i++) {
@@ -112,12 +112,12 @@ public class Room implements Serializable {
                     }
                 }
             }
-        }else {
+       // }else {
             for (int l = inYear; l <= outYear; l++)
             {
 
             }
-        }
+        //}
         for (int l = inYear; l <= outYear; l++) {
             if ((outMonth - inMonth) > 0) {
                 for (int i = inMonth; i <= inMonth; i++) {
