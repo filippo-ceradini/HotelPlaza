@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class ManageStaff extends JFrame {
+public class AdManageStaff extends JFrame {
     private JButton goBack;
     private JButton viewDataButton;
     private JButton update;
@@ -82,9 +82,16 @@ public class ManageStaff extends JFrame {
     private final JTextField[] passwords = {passwordField1, passwordField2, passwordField3, passwordField4, passwordField5, passwordField6, passwordField7, passwordField8, passwordField9};
     private final JCheckBox[] checkBxes = {checkBox1, checkBox2, checkBox3, checkBox4, checkBox5, checkBox6, checkBox7, checkBox8, checkBox9};
 
-    public ManageStaff() {
+    public AdManageStaff() {
 
-        goBack.addActionListener(e -> this.dispose());
+        goBack.addActionListener(e -> {
+            try {
+                GUI.login();
+                this.dispose();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            this.dispose();});
 
         update.addActionListener(e -> {
             ArrayList<Staff> toWrite = FileManager.getStaff();
@@ -148,7 +155,7 @@ public class ManageStaff extends JFrame {
     }
 
     public static void manageStaffe() {
-        JFrame f = new ManageStaff();
+        JFrame f = new AdManageStaff();
         f.setVisible(true);
     }
 

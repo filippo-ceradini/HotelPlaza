@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 
-public class ManageRooms extends JFrame {
+public class AdManageRooms extends JFrame {
     private JTextArea printOutArea;
     private JPanel panelImg;
     private JTextField editSize;
@@ -19,8 +19,15 @@ public class ManageRooms extends JFrame {
     private JTextField textField1;
     private JButton button1;
 
-    public ManageRooms() {
-        goBack.addActionListener(e -> this.dispose());
+    public AdManageRooms() {
+        goBack.addActionListener(e -> {
+            try {
+                GUI.login();
+                this.dispose();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            this.dispose();});
         editButton.addActionListener(e -> {
 
 
@@ -43,7 +50,7 @@ public class ManageRooms extends JFrame {
 
     public static void menuRooms() {
 
-        JFrame m = new ManageRooms();
+        JFrame m = new AdManageRooms();
         m.setVisible(true);
         Print.test();
 

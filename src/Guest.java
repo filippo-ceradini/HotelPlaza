@@ -6,6 +6,8 @@ public class Guest implements Serializable{
     int userID;
     private String login;
     private String password;
+    private String name;
+    private String surname;
     private ArrayList<Integer> bookings = new ArrayList<>();
 
     private static FileManager dataBase = new FileManager();
@@ -62,7 +64,7 @@ public class Guest implements Serializable{
         return storingValuables;
     }
 
-    public static Guest creatingUser() {
+    public static Guest creatingUser(Guest newguest) {
         Guest storingValuables = new Guest();
         ArrayList<Guest> users = dataBase.seeUsers();
         Guest user = new Guest();
