@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class FileManager {
     //Creating files
-    File rooms = new File("Rooms.txt");
+    File rooms = new File("Rooms.ser");
     File usernames = new File("Accounts.txt");
     static File staffFile = new File("Staff.ser");
     ArrayList<Integer> roomsNo = new ArrayList<>();
@@ -36,11 +36,12 @@ public class FileManager {
         return getStaff;
     }
 
-
     public void addRoom(Room newRoom) {
         Room[] writeRooms = seeRooms();
         writeRooms[newRoom.getID()] = newRoom;
+        System.out.println(writeRooms[newRoom.getID()]);
         roomsNo.add(newRoom.getID());
+        System.out.println(roomsNo.get(0));
         try {
             FileOutputStream addRoom = new FileOutputStream(rooms);
             ObjectOutputStream usernamesIN = new ObjectOutputStream(addRoom);
@@ -55,24 +56,24 @@ public class FileManager {
     public void saveChange(Room[] room) {
 
         try {
-            FileOutputStream addUsers = new FileOutputStream(rooms, false);
-            ObjectOutputStream usernamesIN = new ObjectOutputStream(addUsers);
-            usernamesIN.writeObject(room);
-            addUsers.close();
-            usernamesIN.close();
+            FileOutputStream addRoom = new FileOutputStream(rooms, false);
+            ObjectOutputStream roomNamesIN = new ObjectOutputStream(addRoom);
+            roomNamesIN.writeObject(room);
+            addRoom.close();
+            roomNamesIN.close();
         } catch (Exception e) {
             System.out.println("Failed file saving updates");
         }
     }
 
     public Room[] seeRooms() {
-        Room[] seeRooms = new Room[100];
+        Room[] seeRooms = new Room[1000];
         try {
-            FileInputStream userList = new FileInputStream(rooms);
-            ObjectInputStream usernamesOut = new ObjectInputStream(userList);
-            seeRooms = (Room[]) usernamesOut.readObject();
-            userList.close();
-            usernamesOut.close();
+            FileInputStream roomList = new FileInputStream(rooms);
+            ObjectInputStream roomNamesOut = new ObjectInputStream(roomList);
+            seeRooms = (Room[]) roomNamesOut.readObject();
+            roomList.close();
+            roomNamesOut.close();
         } catch (Exception e) {
             System.out.println("Failed file reading");
         }
@@ -92,6 +93,7 @@ public class FileManager {
         }
         return seeRooms;
     }
+
     public void addUser(Guest user) {
 
         ArrayList<Guest> users = seeUsers();

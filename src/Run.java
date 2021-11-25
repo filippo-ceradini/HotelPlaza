@@ -8,13 +8,19 @@ import java.util.Random;
 public class Run {
 
     public static void main(String[] args) throws IOException {
+        Room.createRoom(4,2,400);
+        Room.createRoom(4,3,401);
+        Room.createRoom(3,1,300);
+        Room.createRoom(2,1,200);
+        Room.takeRoom(2021,2021,11,25,12,12,1,400);
+        Room.allRoomsStatus();
 
 
         //GUI.login();
 
 
         //Used to create new rooms for testing
-        ManageRooms.menuRooms();
+        //ManageRooms.menuRooms();
         //ManageStaff.manageStaffe();
 
 
