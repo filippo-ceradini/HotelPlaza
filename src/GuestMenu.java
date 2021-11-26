@@ -56,7 +56,7 @@ public class GuestMenu extends JFrame {
     public GuestMenu() {
 
        goBack.addActionListener(e -> {
-            UserMenu.UserMenu();
+            UserMenu.MainMenu();
             this.dispose();});
         changeDate.addActionListener(e -> {
 

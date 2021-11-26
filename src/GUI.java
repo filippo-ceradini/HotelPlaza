@@ -84,7 +84,7 @@ public class GUI {
                 ) {
                     String username = f.getName() + "." + f.getSurname();
                     if (username.equalsIgnoreCase(login.getText()) && Arrays.equals(f.getPassword().toCharArray(), input)) {
-                        UserMenu.UserMenu();
+                        UserMenu.MainMenu();
                         frame.dispose();
                         JOptionPane.showMessageDialog(null, "Welcome " + f.getName());
                     }

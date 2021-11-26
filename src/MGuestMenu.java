@@ -37,7 +37,7 @@ public class MGuestMenu extends JFrame {
     private JButton button1;
 
     public MGuestMenu() {
-        goBack.addActionListener(e -> {UserMenu.UserMenu();this.dispose(); });
+        goBack.addActionListener(e -> {UserMenu.MainMenu();this.dispose(); });
         AddGuest.addActionListener(e -> {
 
 
