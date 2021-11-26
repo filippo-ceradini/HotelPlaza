@@ -52,6 +52,9 @@ public class UserMenu extends JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        changeDate.addActionListener(e -> {
+            //TODO display coming bookings next few weeks
+        });
     }
 
     public String printRooms() {
@@ -62,7 +65,7 @@ public class UserMenu extends JFrame {
         return data;
     }
 
-    public static void UserMenu() {
+    public static void MainMenu() {
 
         JFrame m = new UserMenu();
         m.setVisible(true);

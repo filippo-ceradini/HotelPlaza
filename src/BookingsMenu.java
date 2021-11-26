@@ -58,14 +58,12 @@ public class BookingsMenu extends JFrame {
     public BookingsMenu() {
 
         goBack.addActionListener(e -> {
-            UserMenu.UserMenu();
+            UserMenu.MainMenu();
             this.dispose();});
-        changeDate.addActionListener(e -> {
 
-        });
 
         addNew.addActionListener(e -> {
-
+            //todo adds new booking with the date and maybe change to add customer?
         });
 
         this.setContentPane(panelImg);
@@ -74,6 +72,19 @@ public class BookingsMenu extends JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        changeDate.addActionListener(e -> {
+            //TODO if changedate is pressed show in the period (with the dates fromJtextField day from ecc)
+            //Print taken rooms first then print free rooms.
+        });
+        printReceiptButton.addActionListener(e -> {
+            //todo Dialog window that has receipt and with print button.
+        });
+        editBookingButton.addActionListener(e -> {
+            //todo edit a booking
+        });
+        deleteBookingButton.addActionListener(e -> {
+            //todo delete a booking
+        });
     }
 
     public String printRooms() {
@@ -93,7 +104,7 @@ public class BookingsMenu extends JFrame {
 
 
     private void createUIComponents() throws IOException, InterruptedException {
-        // TODO: place custom component creation code here
+
         final BufferedImage image = ImageIO.read(new File("background.jpg"));
         panelImg = new JPanel() {
             @Override

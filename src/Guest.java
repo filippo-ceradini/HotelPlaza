@@ -64,7 +64,7 @@ public class Guest implements Serializable{
         return storingValuables;
     }
 
-    public static Guest creatingUser(Guest newguest) {
+    public static Guest creatingUser() {
         Guest storingValuables = new Guest();
         ArrayList<Guest> users = dataBase.seeUsers();
         Guest user = new Guest();
