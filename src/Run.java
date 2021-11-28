@@ -9,11 +9,19 @@ public class Run {
         Room.createRoom(4,3,401);
         Room.createRoom(3,1,300);
         Room.createRoom(2,1,200);
-        Room.takeRoom(2021,2021,11,25,12,12,1,400);
-        //Room.allRoomsStatus();
+        Room.takeRoom(2021,2021,11,12,12,12,1,400);
+        Room.allRoomsStatus();
+        Room.availableBySize(4,2021,2022,11,3,25,1);
+        Room.availableByDate(2021,2021,1,12,17,1);
+        Room.availableByPrice(100,200,2021,2021,1,12,17,1);
+        Room.availableByTier(1,2021,2021,1,12,17,1);
+        Room.allRoomsBookings();
+        Room.deleteGuestRooms(1);
+        System.out.println("hh");
+        Room.allRoomsBookings();
 
 
-        GUI.login();
+        //GUI.login();
 
 
         //Used to create new rooms for testing

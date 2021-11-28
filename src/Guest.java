@@ -27,8 +27,14 @@ public class Guest implements Serializable{
     public void setUserID(int userID) {
         this.userID = userID;
     }
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public static Guest logIn() {
+    /*public static Guest logIn() {
         Guest storingValuables = new Guest();
         ArrayList<Guest> users = dataBase.seeUsers();
         System.out.print("Enter username");
@@ -94,7 +100,7 @@ public class Guest implements Serializable{
         storingValuables.setUserID(users.size());
         //storingValuables.setMenuState(true);-----------------------------------------------------------
         return storingValuables;
-    }
+    }*/
 
     //todo guest toString()
 
