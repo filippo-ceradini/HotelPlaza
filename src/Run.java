@@ -16,8 +16,9 @@ public class Run {
         Room.availableByPrice(100,200,2021,2021,1,12,17,1);
         Room.availableByTier(1,2021,2021,1,12,17,1);
         Room.allRoomsBookings();
-        Room.cancelBooking(2021,2021,11,12,12,12,1,400);
-        //Room.allRoomsBookings();
+        Room.deleteGuestRooms(1);
+        System.out.println("hh");
+        Room.allRoomsBookings();
 
 
         //GUI.login();

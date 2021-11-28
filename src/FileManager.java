@@ -81,7 +81,7 @@ public class FileManager {
     public static Room[] seeRoomsStatic(){
         Room[] seeRooms = new Room[100];
         try {
-            FileInputStream userList = new FileInputStream("Rooms.txt");
+            FileInputStream userList = new FileInputStream("Rooms1.ser");
             ObjectInputStream usernamesOut = new ObjectInputStream(userList);
             seeRooms = (Room[]) usernamesOut.readObject();
             userList.close();

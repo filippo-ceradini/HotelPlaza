@@ -33,7 +33,7 @@ public class Room implements Serializable {
         return "Room Number " + ID +
                 ", size=" + size +
                 ", tier=" + tier +
-                ", price=" + price * 30 +
+                ", price=" + price +
                 '}';
     }
 
@@ -55,25 +55,21 @@ public class Room implements Serializable {
         dataBase.addRoom(storing);
     }
 
-    public static void editRoom(int size, int tier, int ID) {
-        System.out.println();
-        Room storing = new Room();
-        storing.size = size;
-        storing.ID = ID;
-        storing.tier = tier;
-        storing.price = (size * tier);
-        for (int l = 1; l < 4; l++) {
-            for (int i = 0; i < 13; i++) {
-                for (int j = 0; j < 32; j++) {
-                    storing.empty[l][i][j] = true;
-                    storing.takenBy[l][i][j] = 0;
-                    storing.ticket[l][i][j] = 0;
-                }
-            }
-        }
-        dataBase.addRoom(storing);
+    public static void seeRoom(int ID) {
+        Room[] storing = dataBase.seeRooms();
+        System.out.println(ID+" "+storing[ID].size+" "+storing[ID].tier);
     }
 
+    public static void editTierSize(int ID, int tier, int size)
+    {
+        Room[] storing = dataBase.seeRooms();
+        storing[ID].size = size;
+        storing[ID].tier = tier;
+        storing[ID].price = (size * (tier + 1) * 20);
+        System.out.println(ID+" "+storing[ID].size+" "+storing[ID].tier);
+        dataBase.saveChange(storing);
+
+    }
     public static void takeRoom(int inYear1, int outYear1, int inMonth, int outMonth, int inDay, int outDay, int guest, int ID) {
         Room[] storing = dataBase.seeRooms();
         int inYear = (inYear1 - 2020);
@@ -333,6 +329,27 @@ public class Room implements Serializable {
         }
     }
 
+    public static void deleteGuestRooms(int guestID) {
+        Room[] storing = dataBase.seeRooms();
+        for (int i = 0; i < dataBase.roomsNo.size(); i++) {
+            int ID = (dataBase.roomsNo.get(i));
+            boolean inBooking = false;
+            for (int j = 1; j < 4; j++) {
+                for (int k = 1; k < 13; k++) {
+                    for (int l = 1; l < 32; l++) {
+                        if (storing[ID].takenBy[j][k][l] == guestID) {
+                            storing[ID].empty[j][k][l] = true;
+                            storing[ID].takenBy[j][k][l] = 0;
+                            storing[ID].ticket[j][k][l] = 0;
+                        }
+                    }
+                }
+
+            }
+        }
+        dataBase.saveChange(storing);
+    }
+
     public static void availableBySize(int size, int fromYear1, int untilYear1, int inMonth, int outMonth, int inDay, int outDay) {
         int inYear = (fromYear1 - 2020);
         int outYear = (untilYear1 - 2020);
@@ -520,7 +537,7 @@ public class Room implements Serializable {
                 }
             }
             if (free == true) {
-                System.out.println("Room No." + ID + " Size: " + tierName(storing[ID].size) + " Price: " + storing[ID].price);
+                System.out.println("Room No." + ID + " Size: " + storing[ID].size + " Price: " + storing[ID].price);
             }
         }
     }
@@ -711,7 +728,7 @@ public class Room implements Serializable {
         }
     }
 
-    public static void cancelBooking(int inYear1, int outYear1, int inMonth, int outMonth, int inDay, int outDay, int guest, int ID) {
+    public static void cancelBooking(int inYear1, int outYear1, int inMonth, int outMonth, int inDay, int outDay, int ID) {
         int inYear = (inYear1 - 2020);
         int outYear = (outYear1 - 2020);
         Room[] storing = dataBase.seeRooms();
