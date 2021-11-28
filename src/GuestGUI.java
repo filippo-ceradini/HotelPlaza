@@ -67,7 +67,7 @@ public class GuestGUI extends JFrame {
 
 
     private void createUIComponents() throws IOException, InterruptedException {
-        // TODO: place custom component creation code here
+
         /*final BufferedImage image = ImageIO.read(new File("background.jpg"));
         panelImg = new JPanel() {
             @Override
