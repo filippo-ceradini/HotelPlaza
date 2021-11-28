@@ -10,7 +10,7 @@ public class Run {
         Room.createRoom(3,1,300);
         Room.createRoom(2,1,200);
         Room.takeRoom(2021,2021,11,25,12,12,1,400);
-        Room.allRoomsStatus();
+        //Room.allRoomsStatus();
 
 
         GUI.login();
