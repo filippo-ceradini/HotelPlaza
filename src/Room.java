@@ -56,6 +56,7 @@ public class Room implements Serializable {
     }
 
     public static void editRoom(int size, int tier, int ID) {
+        System.out.println();
         Room storing = new Room();
         storing.size = size;
         storing.ID = ID;
