@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class GuestGUI extends JFrame {
     private JTextArea printOutArea;
     private JPanel panelImg;
-
+    private static FileManager dataBase = new FileManager();
 
     private JTextField custName;
     private JTextField custSurname;
@@ -30,6 +30,8 @@ public class GuestGUI extends JFrame {
             Guest newG = new Guest();
             newG.setLogin(custLogin.getText());
             newG.setPassword(custPassword.toString());
+
+            dataBase.addUser(newG);
             GUI.Diag("New gest Created: \n"+"login: "+custLogin.getText()+"\n"+"password: "+custPassword.getText());
             this.dispose();});
         custPassword.addActionListener(e -> {

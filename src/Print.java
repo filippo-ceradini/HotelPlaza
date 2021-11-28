@@ -13,7 +13,7 @@ public class Print {
     public static void test(){
         for (Room r: FileManager.seeRoomsStatic()
     ) {
-        System.out.println(r.toString()+"");
+        //System.out.println(r.toString()+"");
     }}
 
 
@@ -21,7 +21,7 @@ public class Print {
         String returnData = "";
         for (Room r: FileManager.seeRoomsStatic()
              ) {
-            returnData += r.toString()+"\n";
+            //returnData += r.toString()+"\n";
         }
         return  returnData;
     }

@@ -148,12 +148,12 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="f7480" class="javax.swing.JButton" binding="changeDate">
+          <component id="f7480" class="javax.swing.JButton" binding="viewPeriod">
             <constraints>
               <grid row="0" column="13" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="View Period"/>
+              <text value="Rooms Available in this period"/>
             </properties>
           </component>
           <component id="22969" class="javax.swing.JLabel">

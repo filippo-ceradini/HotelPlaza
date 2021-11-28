@@ -1,8 +1,6 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +13,7 @@ public class UserMenu extends JFrame {
     private JButton ManageBookings;
     private JButton goBack;
     private JScrollPane contentPane;
-    private JButton changeDate;
+    private JButton viewPeriod;
     private JTextField dayFrom;
     private JTextField monthFrom;
     private JTextField yearFrom;
@@ -34,8 +32,8 @@ public class UserMenu extends JFrame {
             }
             this.dispose();});
         ManageBookings.addActionListener(e -> {});
-        changeDate.addActionListener(e -> {
-
+        viewPeriod.addActionListener(e -> {
+            Room.availableByDate(Integer.parseInt(yearFrom.getText()),Integer.parseInt(yearTo.getText()),Integer.parseInt(monthFrom.getText()),Integer.parseInt(monthTo.getText()),Integer.parseInt(dayFrom.getText()),Integer.parseInt(dayTo.getText()));
         });
         ManageBookings.addActionListener(e -> {
             BookingsMenu.ManageBookings();
@@ -52,7 +50,7 @@ public class UserMenu extends JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        changeDate.addActionListener(e -> {
+        viewPeriod.addActionListener(e -> {
             //TODO display coming bookings next few weeks
         });
     }
@@ -69,7 +67,7 @@ public class UserMenu extends JFrame {
 
         JFrame m = new UserMenu();
         m.setVisible(true);
-        Print.test();
+        Room.allRoomsStatus();
     }
 
 
