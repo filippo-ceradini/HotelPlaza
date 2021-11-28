@@ -1,6 +1,8 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -48,12 +50,15 @@ public class BookingsMenu extends JFrame {
     private JTextField a12TextField5;
     private JTextField textField6;
     private JTextField textField7;
-    private JTextField textField8;
-    private JTextField textField9;
     private JButton editBookingButton;
     private JButton deleteBookingButton;
     private JButton printReceiptButton;
     private JTextField textField10;
+    private JButton viewAvailableRooms;
+    private JTextField textField11;
+    private JTextField textField12;
+    private JTextField textField13;
+    private JTextField textField8;
 
     public BookingsMenu() {
 
@@ -64,6 +69,7 @@ public class BookingsMenu extends JFrame {
 
         addNew.addActionListener(e -> {
             //todo adds new booking with the date and maybe change to add customer?
+
         });
 
         this.setContentPane(panelImg);
@@ -72,9 +78,8 @@ public class BookingsMenu extends JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        changeDate.addActionListener(e -> {
-            //TODO if changedate is pressed show in the period (with the dates fromJtextField day from ecc)
-            //Print taken rooms first then print free rooms.
+        viewAvailableRooms.addActionListener(e -> {
+            Room.availableByDate(Integer.parseInt(yearFrom.getText()),Integer.parseInt(yearTo.getText()),Integer.parseInt(monthFrom.getText()),Integer.parseInt(monthTo.getText()),Integer.parseInt(dayFrom.getText()),Integer.parseInt(dayTo.getText()));
         });
         printReceiptButton.addActionListener(e -> {
             //todo Dialog window that has receipt and with print button.
@@ -84,6 +89,24 @@ public class BookingsMenu extends JFrame {
         });
         deleteBookingButton.addActionListener(e -> {
             //todo delete a booking
+        });
+        textField1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        textField4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        textField5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
         });
     }
 
@@ -99,7 +122,8 @@ public class BookingsMenu extends JFrame {
 
         JFrame m = new BookingsMenu();
         m.setVisible(true);
-        Print.test();
+        Room.allRoomsStatus();
+
     }
 
 
