@@ -96,4 +96,6 @@ public class Guest implements Serializable{
         return storingValuables;
     }
 
+    //todo guest toString()
+
 }

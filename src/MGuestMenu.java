@@ -12,6 +12,7 @@ import java.io.PrintStream;
 
 
 public class MGuestMenu extends JFrame {
+    private static FileManager l = new FileManager();
     private JTextArea printOutArea;
     private JPanel panelImg;
     private JTextField editSize;
@@ -79,7 +80,10 @@ public class MGuestMenu extends JFrame {
 
         JFrame m = new MGuestMenu();
         m.setVisible(true);
-        Print.test();
+        for (Guest g:l.seeUsers()
+             ) {
+            System.out.println(g.toString());
+        }
 
     }
 
@@ -104,5 +108,8 @@ public class MGuestMenu extends JFrame {
 
     }
 
+    public static void main(String[] args) {
+        menuGuest();
+    }
 
 }
