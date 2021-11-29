@@ -30,9 +30,11 @@ public class GuestGUI extends JFrame {
             Guest newG = new Guest();
             newG.setLogin(custLogin.getText());
             newG.setPassword(custPassword.toString());
-
+            newG.setUserID(dataBase.seeUsers().size()+1);
+            newG.setName(custName.getText());
+            newG.setSurname(custSurname.getText());
             dataBase.addUser(newG);
-            GUI.Diag("New gest Created: \n"+"login: "+custLogin.getText()+"\n"+"password: "+custPassword.getText());
+            GUI.Diag("New gest Created: \n"+"name: "+custName.getText()+" surname: "+custSurname.getText()+"\n"+"login: "+custLogin.getText()+"\n"+"password: "+custPassword.getText());
             this.dispose();});
         custPassword.addActionListener(e -> {
             custLogin.setText(custName.getText()+"."+custSurname.getText());

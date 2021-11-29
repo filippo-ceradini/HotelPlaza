@@ -80,7 +80,7 @@
               <grid row="1" column="8" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
           </hspacer>
-          <component id="4b1a6" class="javax.swing.JTextField" binding="editSize">
+          <component id="4b1a6" class="javax.swing.JTextField" binding="newGuestSurname">
             <constraints>
               <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="50" height="-1"/>
@@ -88,7 +88,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="c561e" class="javax.swing.JTextField" binding="textField6" default-binding="true">
+          <component id="c561e" class="javax.swing.JTextField" binding="editGuestSurname">
             <constraints>
               <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="50" height="-1"/>
@@ -103,36 +103,6 @@
               </grid>
             </constraints>
             <properties/>
-          </component>
-          <component id="78e8" class="javax.swing.JTextField" binding="editTier">
-            <constraints>
-              <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="50" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <text value=""/>
-            </properties>
-          </component>
-          <component id="6af33" class="javax.swing.JTextField" binding="textField7" default-binding="true">
-            <constraints>
-              <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="50" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <text value=""/>
-            </properties>
-          </component>
-          <component id="e4152" class="javax.swing.JTextField" binding="textField13" default-binding="true">
-            <constraints>
-              <grid row="3" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="50" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <text value=""/>
-            </properties>
           </component>
           <component id="89cad" class="javax.swing.JButton" binding="AddGuest">
             <constraints>
@@ -192,33 +162,36 @@
               <text value="Password"/>
             </properties>
           </component>
-          <component id="23d86" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+          <component id="23d86" class="javax.swing.JTextField" binding="newGuestLogin">
             <constraints>
               <grid row="1" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="50" height="-1"/>
               </grid>
             </constraints>
             <properties>
+              <editable value="false"/>
               <text value=""/>
             </properties>
           </component>
-          <component id="c5526" class="javax.swing.JTextField" binding="textField8" default-binding="true">
+          <component id="c5526" class="javax.swing.JTextField" binding="editGuestLogin">
             <constraints>
               <grid row="2" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="50" height="-1"/>
               </grid>
             </constraints>
             <properties>
+              <editable value="false"/>
               <text value=""/>
             </properties>
           </component>
-          <component id="e72" class="javax.swing.JTextField" binding="textField12" default-binding="true">
+          <component id="e72" class="javax.swing.JTextField" binding="delGuestLogin">
             <constraints>
               <grid row="3" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="50" height="-1"/>
               </grid>
             </constraints>
             <properties>
+              <editable value="false"/>
               <text value=""/>
             </properties>
           </component>
@@ -228,10 +201,10 @@
             </constraints>
             <properties>
               <foreground color="-657931"/>
-              <text value="Active Bookings"/>
+              <text value="login"/>
             </properties>
           </component>
-          <component id="68661" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+          <component id="68661" class="javax.swing.JTextField" binding="newGuestName">
             <constraints>
               <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="50" height="-1"/>
@@ -239,7 +212,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="d2735" class="javax.swing.JTextField" binding="textField5" default-binding="true">
+          <component id="d2735" class="javax.swing.JTextField" binding="editGuestName">
             <constraints>
               <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="50" height="-1"/>
@@ -255,7 +228,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="c14b2" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+          <component id="c14b2" class="javax.swing.JTextField" binding="newGuestID">
             <constraints>
               <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
                 <preferred-size width="30" height="-1"/>
@@ -264,7 +237,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="12de" class="javax.swing.JTextField" binding="textField4" default-binding="true">
+          <component id="12de" class="javax.swing.JTextField" binding="editGuestID">
             <constraints>
               <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
                 <preferred-size width="30" height="-1"/>
@@ -290,6 +263,30 @@
               <foreground color="-657931"/>
               <text value="Guest ID"/>
             </properties>
+          </component>
+          <component id="d09d1" class="javax.swing.JPasswordField" binding="editGuestPassword">
+            <constraints>
+              <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="50" height="-1"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="d9a8a" class="javax.swing.JPasswordField" binding="delGuestPassword">
+            <constraints>
+              <grid row="3" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="50" height="-1"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="d7771" class="javax.swing.JPasswordField" binding="newGuestPassword">
+            <constraints>
+              <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="50" height="-1"/>
+              </grid>
+            </constraints>
+            <properties/>
           </component>
         </children>
       </grid>

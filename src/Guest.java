@@ -5,12 +5,23 @@ import java.util.Scanner;
 public class Guest implements Serializable{
     int userID;
     private String login;
+
+    public int getUserID() {return userID;}
+
     private String password;
     private String name;
     private String surname;
     private ArrayList<Integer> bookings = new ArrayList<>();
 
     private static FileManager dataBase = new FileManager();
+
+    public String getName() {return name;}
+
+    public String getSurname() {return surname;}
+
+    public ArrayList<Integer> getBookings() {return bookings;}
+
+    public static FileManager getDataBase() {return dataBase;}
 
     public String getLogin() {
         return login;
@@ -32,6 +43,15 @@ public class Guest implements Serializable{
     }
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "GuestID=" + userID +
+                ", " + name +
+                " " + surname +
+                ", bookings=" + bookings+
+        ", login= " + login;
     }
 
     /*public static Guest logIn() {
@@ -102,6 +122,6 @@ public class Guest implements Serializable{
         return storingValuables;
     }*/
 
-    //todo guest toString()
+
 
 }
