@@ -216,8 +216,8 @@ public class Room implements Serializable {
     }
 
     public static void allRoomsStatus() {
-        for (int i = 0; i < dataBase.roomsNo.size(); i++) {
-            seeRoomStatus(dataBase.roomsNo.get(i));
+        for (int i = 0; i < dataBase.seeRoomsNo().size(); i++) {
+            seeRoomStatus(dataBase.seeRoomsNo().get(i));
         }
     }
 
@@ -292,8 +292,8 @@ public class Room implements Serializable {
     }
 
     public static void guestsRooms(int guestID) {
-        for (int i = 0; i < dataBase.roomsNo.size(); i++) {
-            int ID = (dataBase.roomsNo.get(i));
+        for (int i = 0; i < dataBase.seeRoomsNo().size(); i++) {
+            int ID = (dataBase.seeRoomsNo().get(i));
             Room[] storing = dataBase.seeRooms();
             boolean inBooking = false;
             int IDUsing = 0;
@@ -331,8 +331,8 @@ public class Room implements Serializable {
 
     public static void deleteGuestRooms(int guestID) {
         Room[] storing = dataBase.seeRooms();
-        for (int i = 0; i < dataBase.roomsNo.size(); i++) {
-            int ID = (dataBase.roomsNo.get(i));
+        for (int i = 0; i < dataBase.seeRoomsNo().size(); i++) {
+            int ID = (dataBase.seeRoomsNo().get(i));
             boolean inBooking = false;
             for (int j = 1; j < 4; j++) {
                 for (int k = 1; k < 13; k++) {
@@ -355,9 +355,9 @@ public class Room implements Serializable {
         int outYear = (untilYear1 - 2020);
         Room[] storing = dataBase.seeRooms();
         ArrayList<Room> storing1 = new ArrayList<>();
-        for (int i = 0; i < dataBase.roomsNo.size(); i++) {
-            if (storing[dataBase.roomsNo.get(i)].size == size) {
-                storing1.add(storing[dataBase.roomsNo.get(i)]);
+        for (int i = 0; i < dataBase.seeRoomsNo().size(); i++) {
+            if (storing[dataBase.seeRoomsNo().get(i)].size == size) {
+                storing1.add(storing[dataBase.seeRoomsNo().get(i)]);
             }
         }
         for (int q = 0; q < storing1.size(); q++) {
@@ -451,9 +451,9 @@ public class Room implements Serializable {
         int outYear = (untilYear1 - 2020);
         Room[] storing = dataBase.seeRooms();
         ArrayList<Room> storing1 = new ArrayList<>();
-        for (int i = 0; i < dataBase.roomsNo.size(); i++) {
-            if (storing[dataBase.roomsNo.get(i)].tier == tier) {
-                storing1.add(storing[dataBase.roomsNo.get(i)]);
+        for (int i = 0; i < dataBase.seeRoomsNo().size(); i++) {
+            if (storing[dataBase.seeRoomsNo().get(i)].tier == tier) {
+                storing1.add(storing[dataBase.seeRoomsNo().get(i)]);
             }
         }
         for (int q = 0; q < storing1.size(); q++) {
@@ -547,9 +547,9 @@ public class Room implements Serializable {
         int outYear = (untilYear1 - 2020);
         Room[] storing = dataBase.seeRooms();
         ArrayList<Room> storing1 = new ArrayList<>();
-        for (int i = 0; i < dataBase.roomsNo.size(); i++) {
-            if (storing[dataBase.roomsNo.get(i)].price >= fromPrice && storing[dataBase.roomsNo.get(i)].price <= untilPrice) {
-                storing1.add(storing[dataBase.roomsNo.get(i)]);
+        for (int i = 0; i < dataBase.seeRoomsNo().size(); i++) {
+            if (storing[dataBase.seeRoomsNo().get(i)].price >= fromPrice && storing[dataBase.seeRoomsNo().get(i)].price <= untilPrice) {
+                storing1.add(storing[dataBase.seeRoomsNo().get(i)]);
             }
         }
         for (int q = 0; q < storing1.size(); q++) {
@@ -642,9 +642,9 @@ public class Room implements Serializable {
         int inYear = (fromYear1 - 2020);
         int outYear = (untilYear1 - 2020);
         Room[] storing = dataBase.seeRooms();
-        for (int q = 0; q < dataBase.roomsNo.size(); q++) {
+        for (int q = 0; q < dataBase.seeRoomsNo().size(); q++) {
             boolean free = true;
-            int ID = storing[dataBase.roomsNo.get(q)].ID;
+            int ID = storing[dataBase.seeRoomsNo().get(q)].ID;
             if ((outYear - inYear) > 0) {
                 for (int l = inYear; l <= inYear; l++) {
                     for (int i = inMonth; i <= inMonth; i++) {
@@ -834,8 +834,8 @@ public class Room implements Serializable {
     }
 
     public static void allRoomsBookings() {
-        for (int i = 0; i < dataBase.roomsNo.size(); i++) {
-            int ID = (dataBase.roomsNo.get(i));
+        for (int i = 0; i < dataBase.seeRoomsNo().size(); i++) {
+            int ID = (dataBase.seeRoomsNo().get(i));
             Room[] storing = dataBase.seeRooms();
             boolean free = true;
             for (int j = 1; j < 4; j++) {
@@ -903,5 +903,30 @@ public class Room implements Serializable {
             }
 
         }
+    }
+
+    public static void getTicket(int user, int room)
+    {
+        Room[] storing = dataBase.seeRooms();
+        boolean free = true;
+        String print = "You own us ";
+        String convert;
+            for (int j = 1; j < 4; j++) {
+                for (int k = 1; k < 13; k++) {
+                    for (int l = 1; l < 32; l++) {
+                        if (storing[room].takenBy[j][k][l] == user) {
+                            convert = String.valueOf(storing[room].ticket[j][k][l]);
+                            print += convert;
+                            print += "\nWe accept Mastercard, Visa, Dollars\nGolden coins, Euros, Złoty, Firstborn child";
+                            //GUI.Diag(print);
+                            break;
+                        }
+
+                    }
+                }
+            }
+
+
+        System.out.println(print);
     }
 }

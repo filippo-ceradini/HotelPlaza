@@ -3,9 +3,10 @@ import java.util.ArrayList;
 
 public class FileManager {
     //Creating files
-    File rooms = new File("Rooms.ser");
+    File rooms = new File("Rooms.txt");
     File usernames = new File("Accounts.txt");
     static File staffFile = new File("Staff.ser");
+    File roomsNumbers = new File("RoomsNo.txt");
     ArrayList<Integer> roomsNo = new ArrayList<>();
     ArrayList<Staff> staffDB = getStaff();
 
@@ -39,17 +40,45 @@ public class FileManager {
     public void addRoom(Room newRoom) {
         Room[] writeRooms = seeRooms();
         writeRooms[newRoom.getID()] = newRoom;
-        roomsNo.add(newRoom.getID());
+        addRoomNo(newRoom.getID());
         try {
             FileOutputStream addRoom = new FileOutputStream(rooms);
             ObjectOutputStream usernamesIN = new ObjectOutputStream(addRoom);
             usernamesIN.writeObject(writeRooms);
-            addRoom.close();
             usernamesIN.close();
+            addRoom.close();
         } catch (Exception e) {
             System.out.println("Failed file writing");
         }
     }
+
+    public void addRoomNo(int number) {
+        roomsNo.add(number);
+        try {
+            FileOutputStream addRoom = new FileOutputStream(roomsNumbers);
+            ObjectOutputStream usernamesIN = new ObjectOutputStream(addRoom);
+            usernamesIN.writeObject(roomsNo);
+            usernamesIN.close();
+            addRoom.close();
+        } catch (Exception e) {
+            System.out.println("Failed file writing of roomsNO");
+        }
+    }
+
+    public ArrayList<Integer> seeRoomsNo() {
+
+        try {
+            FileInputStream roomList = new FileInputStream(roomsNumbers);
+            ObjectInputStream roomNamesOut = new ObjectInputStream(roomList);
+            roomsNo = (ArrayList<Integer>) roomNamesOut.readObject();
+            roomNamesOut.close();
+            roomList.close();
+        } catch (Exception e) {
+            System.out.println("Failed file reading of roomsNO");
+        }
+        return roomsNo;
+    }
+
 
     public void saveChange(Room[] room) {
 
@@ -57,8 +86,8 @@ public class FileManager {
             FileOutputStream addRoom = new FileOutputStream(rooms, false);
             ObjectOutputStream roomNamesIN = new ObjectOutputStream(addRoom);
             roomNamesIN.writeObject(room);
-            addRoom.close();
             roomNamesIN.close();
+            addRoom.close();
         } catch (Exception e) {
             System.out.println("Failed file saving updates");
         }
@@ -70,8 +99,8 @@ public class FileManager {
             FileInputStream roomList = new FileInputStream(rooms);
             ObjectInputStream roomNamesOut = new ObjectInputStream(roomList);
             seeRooms = (Room[]) roomNamesOut.readObject();
-            roomList.close();
             roomNamesOut.close();
+            roomList.close();
         } catch (Exception e) {
             System.out.println("Failed file reading");
         }
