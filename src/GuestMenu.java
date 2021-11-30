@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 
 
 public class GuestMenu extends JFrame {
@@ -14,7 +15,7 @@ public class GuestMenu extends JFrame {
 
     private JButton goBack;
     private JScrollPane contentPane;
-    private JButton changeDate;
+    private JButton AvlbRooms;
     private JTextField dayFrom;
     private JTextField monthFrom;
     private JTextField yearFrom;
@@ -43,23 +44,20 @@ public class GuestMenu extends JFrame {
     private JTextField a12TextField5;
     private JTextField textField6;
     private JTextField textField7;
-    private JTextField textField9;
     private JButton editBookingButton;
     private JButton deleteBookingButton;
-    private JTextField textField8;
     private JTextField textField1;
     private JTextField textField2;
     private JTextField textField3;
     private JTextArea textArea1;
-    private JScrollPane scrollPane1;
 
     public GuestMenu() {
 
        goBack.addActionListener(e -> {
             UserMenu.MainMenu();
             this.dispose();});
-        changeDate.addActionListener(e -> {
-
+        AvlbRooms.addActionListener(e -> {
+            Room.availableByDate(Integer.parseInt(yearFrom.getText()),Integer.parseInt(yearTo.getText()),Integer.parseInt(monthFrom.getText()),Integer.parseInt(monthTo.getText()),Integer.parseInt(dayFrom.getText()),Integer.parseInt(dayTo.getText()));
         });
 
         addNew.addActionListener(e -> {
@@ -98,10 +96,13 @@ public class GuestMenu extends JFrame {
         };
         textArea1 = new JTextArea();
         printOutArea = new JTextArea();
+        printOutArea.setEditable(false);
+        JTextAreaOutputStream out = new JTextAreaOutputStream(printOutArea);
+        System.setOut(new PrintStream(out));
 
 
     }
-    public static void GuestMenue() {
+    public static void GuestMenue(int GuestID) {
 
         JFrame m = new GuestMenu();
         m.setVisible(true);

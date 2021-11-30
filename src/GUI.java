@@ -15,6 +15,7 @@ public class GUI {
 
 
     public static void login() throws IOException {
+        FileManager fm = new FileManager();
         final BufferedImage image = ImageIO.read(new File("background.jpg"));
         JPanel pane = new JPanel() {
             @Override
@@ -95,8 +96,20 @@ public class GUI {
 
         });
         Guest.addActionListener(e -> {
-
-            GuestMenu.GuestMenue();
+            int GuestID = 0;
+            char[] input = passwordField.getPassword();
+            int cnt = 0;
+            for (Guest guest : fm.seeUsers()
+            ) {
+                System.out.println(login.getText() + guest.getLogin() + guest.getPassword() + input);
+                if (login.getText().equals(guest.getLogin()) && Arrays.equals(guest.getPassword().toCharArray(), input)) {
+                    System.out.println(login.getText() + guest.getLogin() + guest.getPassword().toCharArray() + input);
+                    GuestID = guest.getUserID();
+                    GuestMenu.GuestMenue(GuestID);
+                    cnt++;
+                }
+            }
+            if (cnt == 0) {Diag("No Guest Found");}
         });
 
         newGuest.addActionListener(e -> {
@@ -110,7 +123,6 @@ public class GUI {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-
 
     public static void admin() throws IOException {
         JFrame frame = new JFrame();
@@ -162,7 +174,7 @@ public class GUI {
         frame.setVisible(true);
     }
 
-    public static void Diag(String message){
+    public static void Diag(String message) {
         JOptionPane.showMessageDialog(null, message);
     }
 }

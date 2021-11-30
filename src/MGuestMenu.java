@@ -46,7 +46,7 @@ public class MGuestMenu extends JFrame {
         AddGuest.addActionListener(e -> {
             Guest newG = new Guest();
             newG.setLogin(newGuestLogin.getText());
-            newG.setPassword(newGuestPassword.toString());
+            newG.setPassword(newGuestPassword.getText());
             newG.setUserID(l.seeUsers().size()+1);
             newG.setName(newGuestName.getText());
             newG.setSurname(newGuestSurname.getText());
@@ -69,11 +69,11 @@ public class MGuestMenu extends JFrame {
         editGuestButton.addActionListener(e -> {
             Guest newG = new Guest();
             editGuestLogin.setText(editGuestName.getText()+"."+editGuestSurname.getText());
-            newG.setPassword(editGuestPassword.toString());
+            newG.setPassword(editGuestPassword.getText());
             newG.setName(editGuestName.getText());
             newG.setSurname(editGuestSurname.getText());
             newG.setUserID(Integer.parseInt(editGuestID.getText()));
-
+            newG.setLogin(editGuestLogin.getText());
             int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to edit? "+newG.toString());
             switch (result) {
                 case JOptionPane.YES_OPTION:
@@ -106,7 +106,7 @@ public class MGuestMenu extends JFrame {
         deleteGuestButton.addActionListener(e -> {
             Guest newG = new Guest();
             newG.setLogin(delGuestLogin.getText());
-            newG.setPassword(delGuestPassword.toString());
+            newG.setPassword(delGuestPassword.getText());
             newG.setName(delGuestName.getText());
             newG.setSurname(delGuestSurname.getText());
             newG.setUserID(Integer.parseInt(delGuestID.getText()));

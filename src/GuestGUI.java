@@ -29,7 +29,8 @@ public class GuestGUI extends JFrame {
         addNew.addActionListener(e -> {
             Guest newG = new Guest();
             newG.setLogin(custLogin.getText());
-            newG.setPassword(custPassword.toString());
+            newG.setPassword(custPassword.getText());
+            GUI.Diag(custPassword.getText());
             newG.setUserID(dataBase.seeUsers().size()+1);
             newG.setName(custName.getText());
             newG.setSurname(custSurname.getText());
