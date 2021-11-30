@@ -136,6 +136,27 @@ public class FileManager {
         }
     }
 
+    public void deleteUser(Guest user) {
+
+        ArrayList<Guest> users = seeUsers();
+        int index=-1;
+        for (int i = 0; i < seeUsers().size(); i++) {
+            if (user.getUserID()==seeUsers().get(i).getUserID()){
+                index=i;
+            }
+        }
+        if(index>=0){users.remove(index);
+        try {
+            FileOutputStream addUsers = new FileOutputStream(usernames);
+            ObjectOutputStream usernamesIN = new ObjectOutputStream(addUsers);
+            usernamesIN.writeObject(users);
+            addUsers.close();
+            usernamesIN.close();
+        } catch (Exception e) {
+            System.out.println("Failed file writing");
+        }}
+    }
+
     /*public void saveChange(ArrayList<Guest> users) {
 
         try {

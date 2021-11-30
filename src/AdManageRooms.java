@@ -1,6 +1,8 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -8,6 +10,7 @@ import java.io.PrintStream;
 
 
 public class AdManageRooms extends JFrame {
+    private static FileManager l =new FileManager();
     private JTextArea printOutArea;
     private JPanel panelImg;
     private JTextField editSize;
@@ -38,6 +41,9 @@ public class AdManageRooms extends JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ediRoomNr.addActionListener(e -> {
+            //editSize.setText(l.seeRooms()[Integer.parseInt(ediRoomNr.getText())]);
+        });
     }
 
     public String printRooms() {
