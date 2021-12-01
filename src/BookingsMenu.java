@@ -53,12 +53,12 @@ public class BookingsMenu extends JFrame {
     private JButton editBookingButton;
     private JButton deleteBookingButton;
     private JButton printReceiptButton;
-    private JTextField textField10;
+    private JTextField roomNumberReceipt;
     private JButton viewAvailableRooms;
     private JTextField textField11;
     private JTextField textField12;
     private JTextField textField13;
-    private JTextField textField8;
+    private JTextField guestIDReceipt;
 
     public BookingsMenu() {
 
@@ -80,6 +80,8 @@ public class BookingsMenu extends JFrame {
 
         viewAvailableRooms.addActionListener(e -> {
             Room.availableByDate(Integer.parseInt(yearFrom.getText()),Integer.parseInt(yearTo.getText()),Integer.parseInt(monthFrom.getText()),Integer.parseInt(monthTo.getText()),Integer.parseInt(dayFrom.getText()),Integer.parseInt(dayTo.getText()));
+            System.out.println("Rooms Booked");
+            Room.allRoomsBookings();
         });
         printReceiptButton.addActionListener(e -> {
             //todo Dialog window that has receipt and with print button.
@@ -108,15 +110,18 @@ public class BookingsMenu extends JFrame {
 
             }
         });
+        printReceiptButton.addActionListener(e -> {
+            Room.getTicket(Integer.parseInt(guestIDReceipt.getText()),Integer.parseInt(roomNumberReceipt.getText()));
+        });
     }
 
-    public String printRooms() {
+    /*public String printRooms() {
         String data = "";
         for (int i = 0; i < FileManager.getStaff().size(); i++) {
             data = data + FileManager.getStaff().get(i).toString() + "\n";
         }
         return data;
-    }
+    }*/
 
     public static void ManageBookings() {
 
@@ -148,5 +153,8 @@ public class BookingsMenu extends JFrame {
 
     }
 
+    public static void main(String[] args) {
+        ManageBookings();
+    }
 
 }

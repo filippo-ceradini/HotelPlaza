@@ -9,6 +9,7 @@ import java.io.PrintStream;
 
 
 public class GuestMenu extends JFrame {
+    FileManager fm = new FileManager();
     private JPanel backgrdPanel;
     private JTextArea printOutArea;
 
@@ -105,7 +106,15 @@ public class GuestMenu extends JFrame {
     public static void GuestMenue(int GuestID) {
 
         JFrame m = new GuestMenu();
+
         m.setVisible(true);
+        FileManager fm = new FileManager();
+        for (Guest g:fm.seeUsers()
+             ) {
+            if (g.getUserID()==GuestID){
+                GUI.Diag("Hello "+g.getName());
+            }
+        }
 
     }
 

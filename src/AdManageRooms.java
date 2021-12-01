@@ -3,6 +3,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +12,7 @@ import java.io.PrintStream;
 
 
 public class AdManageRooms extends JFrame {
-    private static FileManager l =new FileManager();
+    private static FileManager l = new FileManager();
     private JTextArea printOutArea;
     private JPanel panelImg;
     private JTextField editSize;
@@ -19,7 +21,7 @@ public class AdManageRooms extends JFrame {
     private JButton goBack;
     private JScrollPane contentPane;
     private JTextField ediRoomNr;
-    private JTextField textField1;
+    private JTextField editPrice;
     private JButton button1;
 
     public AdManageRooms() {
@@ -30,10 +32,12 @@ public class AdManageRooms extends JFrame {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            this.dispose();});
+            this.dispose();
+        });
         editButton.addActionListener(e -> {
-
-
+            Room.createRoom(Integer.parseInt(editSize.getText()),Integer.parseInt(editTier.getText()),Integer.parseInt(ediRoomNr.getText()));
+            GUI.Diag("Room Successfuly Edited");
+            Room.allRooms();
         });
 
         this.setContentPane(panelImg);
@@ -44,6 +48,37 @@ public class AdManageRooms extends JFrame {
         ediRoomNr.addActionListener(e -> {
             //editSize.setText(l.seeRooms()[Integer.parseInt(ediRoomNr.getText())]);
         });
+        editTier.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        editSize.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                Room newRoom = new Room();
+                Room[] g = l.seeRooms();
+                try {
+                    for (int i = 1; i < l.seeRooms().length; i++) {
+                        if (g[i].getID() == Integer.parseInt(ediRoomNr.getText())) {
+                            newRoom = g[i];
+                        }
+                    }
+                } catch (NullPointerException ne) {
+
+                }
+
+                editSize.setText(String.valueOf(newRoom.getSize()));
+                editTier.setText(String.valueOf(newRoom.getTier()));
+                editPrice.setText(String.valueOf(newRoom.getPrice()));
+
+
+            }
+        });
+
     }
 
     public String printRooms() {
@@ -58,7 +93,7 @@ public class AdManageRooms extends JFrame {
 
         JFrame m = new AdManageRooms();
         m.setVisible(true);
-        Print.test();
+Room.allRooms();
 
     }
 
@@ -83,5 +118,8 @@ public class AdManageRooms extends JFrame {
 
     }
 
+    public static void main(String[] args) {
+        menuRooms();
+    }
 
 }

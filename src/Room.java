@@ -5,6 +5,12 @@ import java.util.ArrayList;
 public class Room implements Serializable {
 
     private int ID;
+    private int size;
+    private boolean[][][] empty = new boolean[4][13][32];
+    private int[][][] takenBy = new int[4][13][32];
+    private int tier;
+    private int price;
+    private int[][][] ticket = new int[4][13][32];
 
     public Room(int ID, int size, int tier) {
         this.ID = ID;
@@ -12,12 +18,51 @@ public class Room implements Serializable {
         this.tier = tier;
     }
 
-    private int size;
-    private boolean[][][] empty = new boolean[4][13][32];
-    private int[][][] takenBy = new int[4][13][32];
-    private int tier;
-    private int price;
-    private int[][][] ticket = new int[4][13][32];
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public int getSize() {return size;}
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public boolean[][][] getEmpty() {return empty;}
+
+    public void setEmpty(boolean[][][] empty) {
+        this.empty = empty;
+    }
+
+    public int[][][] getTakenBy() {return takenBy;}
+
+    public void setTakenBy(int[][][] takenBy) {
+        this.takenBy = takenBy;
+    }
+
+    public int getTier() {return tier;}
+
+    public void setTier(int tier) {
+        this.tier = tier;
+    }
+
+    public int getPrice() {return price;}
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int[][][] getTicket() {return ticket;}
+
+    public void setTicket(int[][][] ticket) {
+        this.ticket = ticket;
+    }
+
+    public static FileManager getDataBase() {return dataBase;}
+
+    public static void setDataBase(FileManager dataBase) {
+        Room.dataBase = dataBase;
+    }
 
     private static FileManager dataBase = new FileManager();
 
@@ -30,11 +75,10 @@ public class Room implements Serializable {
     }
 
     public String toString() {
-        return "Room Number " + ID +
+        return "       Room Number " + ID +
                 ", size=" + size +
                 ", tier=" + tier +
-                ", price=" + price +
-                '}';
+                ", price=" + price;
     }
 
     public static void createRoom(int size, int tier, int ID) {
@@ -219,6 +263,16 @@ public class Room implements Serializable {
         for (int i = 0; i < dataBase.seeRoomsNo().size(); i++) {
             seeRoomStatus(dataBase.seeRoomsNo().get(i));
         }
+    }
+
+    public static void allRooms() {
+        Room[] storing = dataBase.seeRooms();
+        try {
+            for (int i = 1; i < storing.length; i++) {
+                System.out.println(storing[i].toString());
+            }
+        } catch (NullPointerException e){}
+
     }
 
     public static void seeRoomStatus(int ID) {
@@ -909,13 +963,16 @@ public class Room implements Serializable {
     {
         Room[] storing = dataBase.seeRooms();
         boolean free = true;
-        String print = "You own us ";
-        String convert;
+
+        String print = "Could not find a booking";
+        try {
+            String convert;
             for (int j = 1; j < 4; j++) {
                 for (int k = 1; k < 13; k++) {
                     for (int l = 1; l < 32; l++) {
                         if (storing[room].takenBy[j][k][l] == user) {
                             convert = String.valueOf(storing[room].ticket[j][k][l]);
+                            print = "You owe us ";
                             print += convert;
                             print += "\nWe accept Mastercard, Visa, Dollars\nGolden coins, Euros, Złoty, Firstborn child";
                             //GUI.Diag(print);
@@ -925,8 +982,10 @@ public class Room implements Serializable {
                     }
                 }
             }
-
-
-        System.out.println(print);
+        } catch (NullPointerException e){
+        }
+        GUI.Diag(print);
     }
+
+
 }

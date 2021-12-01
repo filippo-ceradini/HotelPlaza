@@ -8,23 +8,29 @@ import java.util.Random;
 public class Run {
 
     public static void main(String[] args) throws IOException {
+        Room[] rm = new Room[500];
+        FileManager sm = new FileManager();
+        sm.saveChange(rm);
+        int cnt=0;
+        for (int i = 0; i < 50; i++) {
+            Random rand = new Random();
 
-        Room.createRoom(4,2,400);
-        Room.createRoom(4,3,401);
-        Room.createRoom(3,1,300);
-        Room.createRoom(2,1,200);
-        Room.takeRoom(2021,2021,11,12,12,12,1,400);
+            Room.createRoom(rand.nextInt(4)+1,rand.nextInt(3)+1,1+cnt );
+            System.out.println("room created "+(1+cnt));
+            cnt++;
+        }
+
+        Room.takeRoom(2021,2021,11,12,12,12,1,30);
         Room.allRoomsStatus();
         Room.availableBySize(4,2021,2022,11,3,25,1);
         Room.availableByDate(2021,2021,1,12,17,1);
         Room.availableByPrice(100,200,2021,2021,1,12,17,1);
         Room.availableByTier(1,2021,2021,1,12,17,1);
         Room.allRoomsBookings();
-        Room.deleteGuestRooms(1);
-        System.out.println("hh");
+        //Room.deleteGuestRooms(1);
         Room.allRoomsBookings();
 
-
+        Room.allRooms();
         GUI.login();
 
 

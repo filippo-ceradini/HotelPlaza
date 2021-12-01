@@ -94,7 +94,7 @@ public class FileManager {
     }
 
     public Room[] seeRooms() {
-        Room[] seeRooms = new Room[1000];
+        Room[] seeRooms = new Room[500];
         try {
             FileInputStream roomList = new FileInputStream(rooms);
             ObjectInputStream roomNamesOut = new ObjectInputStream(roomList);
