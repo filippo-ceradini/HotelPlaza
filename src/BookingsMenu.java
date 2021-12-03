@@ -3,6 +3,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,9 +12,10 @@ import java.io.PrintStream;
 
 
 public class BookingsMenu extends JFrame {
+
     private JTextArea printOutArea;
     private JPanel panelImg;
-
+    FileManager fm = new FileManager();
     private JButton goBack;
     private JScrollPane contentPane;
     private JButton changeDate;
@@ -23,42 +26,47 @@ public class BookingsMenu extends JFrame {
     private JTextField monthTo;
     private JTextField yearTo;
     private JButton addNew;
-    private JTextField guestTextField;
-    private JTextField roomTextField;
-    private JTextField a12TextField1;
-    private JTextField a11TextField;
-    private JTextField a2021TextField;
-    private JTextField a12TextField;
-    private JTextField a1TextField;
-    private JTextField a2022TextField;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
-    private JTextField a11TextField1;
-    private JTextField a1TextField1;
-    private JTextField a2022TextField1;
-    private JTextField a2021TextField1;
-    private JTextField a12TextField2;
-    private JTextField a12TextField3;
-    private JTextField a2022TextField2;
-    private JTextField a12TextField4;
-    private JTextField a2021TextField2;
-    private JTextField a1TextField2;
-    private JTextField a11TextField2;
-    private JTextField a12TextField5;
-    private JTextField textField6;
-    private JTextField textField7;
+    private JTextField newBookName;
+    private JTextField newBookRoom;
+    private JTextField newBookDayFrom;
+    private JTextField newBookMonthFrom;
+    private JTextField newBookYearFrom;
+    private JTextField newBookDayTo;
+    private JTextField newBookMonthTo;
+    private JTextField newBookYearTo;
+    private JTextField newBookSurname;
+    private JTextField editBookGuestName;
+    private JTextField delBookGuestName;
+    private JTextField editBookGuestSurname;
+
+    private JTextField editBookMonthFrom;
+    private JTextField editBookMonthTo;
+    private JTextField editBookYearTo;
+    private JTextField editBookYearFrom;
+    private JTextField editBookDayTo;
+    private JTextField editBookDayFrom;
+    private JTextField delBookYearTo;
+    private JTextField delBookDayTo;
+    private JTextField delBookYearFrom;
+    private JTextField delBookMonthTo;
+    private JTextField delBookMonthFrom;
+    private JTextField delBookDayFrom;
+    private JTextField editBookRoomNo;
+    private JTextField delBookRoomNo;
     private JButton editBookingButton;
     private JButton deleteBookingButton;
     private JButton printReceiptButton;
     private JTextField roomNumberReceipt;
     private JButton viewAvailableRooms;
-    private JTextField textField11;
-    private JTextField textField12;
-    private JTextField textField13;
+    private JTextField newBookGuestID;
+    private JTextField editBookGuestID;
+    private JTextField delBookGuestID;
     private JTextField guestIDReceipt;
+    private JComboBox comboSize;
+    private JComboBox comboTier;
+    private JButton availableBySizeButton;
+    private JButton availableByTierButton;
+    private JTextField delBookGuestSurname;
 
     public BookingsMenu() {
 
@@ -68,8 +76,15 @@ public class BookingsMenu extends JFrame {
 
 
         addNew.addActionListener(e -> {
-            //todo adds new booking with the date and maybe change to add customer?
-
+            Room.takeRoom(Integer.parseInt(newBookYearFrom.getText()),Integer.parseInt(newBookYearTo.getText()),Integer.parseInt(newBookMonthFrom.getText()),Integer.parseInt(newBookMonthTo.getText()),Integer.parseInt(newBookDayFrom.getText()),Integer.parseInt(newBookDayTo.getText()),Integer.parseInt(newBookGuestID.getText()),Integer.parseInt(newBookRoom.getText()));
+            GUI.Diag("booking added \n" + newBookName.getText()+" "+ newBookSurname.getText() +" in Room No "+newBookRoom.getText()
+            +"\n from: "+newBookDayFrom.getText()+"/"+newBookMonthFrom.getText()+"/"+newBookYearFrom.getText()
+            +"\n to: "+newBookDayTo.getText()+"/"+newBookMonthTo.getText()+"/"+newBookYearTo.getText());
+            newBookName.setText("");
+            newBookSurname.setText("");
+            newBookGuestID.setText("");
+            newBookRoom.setText("");
+            Room.allRoomsStatus();
         });
 
         this.setContentPane(panelImg);
@@ -83,35 +98,72 @@ public class BookingsMenu extends JFrame {
             System.out.println("Rooms Booked");
             Room.allRoomsBookings();
         });
-        printReceiptButton.addActionListener(e -> {
-            //todo Dialog window that has receipt and with print button.
-        });
         editBookingButton.addActionListener(e -> {
             //todo edit a booking
         });
         deleteBookingButton.addActionListener(e -> {
-            //todo delete a booking
+            int result = JOptionPane.showConfirmDialog(null, "booking added \n" + delBookGuestName.getText()+" "+ delBookGuestSurname.getText() +" in Room No "+delBookRoomNo.getText()
+                    +"\n from: "+delBookDayFrom.getText()+"/"+delBookMonthFrom.getText()+"/"+delBookYearFrom.getText()
+                    +"\n to: "+delBookDayTo.getText()+"/"+delBookMonthTo.getText()+"/"+delBookYearTo.getText());
+            switch (result) {
+                case JOptionPane.YES_OPTION:
+                    Room.cancelBooking(Integer.parseInt(delBookYearFrom.getText()),Integer.parseInt(delBookYearTo.getText()),Integer.parseInt(delBookMonthFrom.getText()),Integer.parseInt(delBookMonthTo.getText()),Integer.parseInt(delBookDayFrom.getText()),Integer.parseInt(delBookDayTo.getText()),Integer.parseInt(delBookRoomNo.getText()));
+                    GUI.Diag("Booking deleted");
+                    break;
+                case JOptionPane.NO_OPTION:
+                    break;
+                case JOptionPane.CANCEL_OPTION:
+                    break;
+                case JOptionPane.CLOSED_OPTION:
+                    break;
+
+            }
+            Room.allRoomsStatus();
         });
-        textField1.addActionListener(new ActionListener() {
+        newBookSurname.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
             }
         });
-        textField4.addActionListener(new ActionListener() {
+        editBookGuestSurname.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
             }
         });
-        textField5.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
-        });
+
         printReceiptButton.addActionListener(e -> {
             Room.getTicket(Integer.parseInt(guestIDReceipt.getText()),Integer.parseInt(roomNumberReceipt.getText()));
+        });
+        availableBySizeButton.addActionListener(e -> {
+
+            Room.availableBySize(comboSize.getSelectedIndex()+1,Integer.parseInt(yearFrom.getText()),Integer.parseInt(yearTo.getText()),Integer.parseInt(monthFrom.getText()),Integer.parseInt(monthTo.getText()),Integer.parseInt(dayFrom.getText()),Integer.parseInt(dayTo.getText()));
+        });
+        availableByTierButton.addActionListener(e -> {
+            Room.availableByTier(comboTier.getSelectedIndex()+1,Integer.parseInt(yearFrom.getText()),Integer.parseInt(yearTo.getText()),Integer.parseInt(monthFrom.getText()),Integer.parseInt(monthTo.getText()),Integer.parseInt(dayFrom.getText()),Integer.parseInt(dayTo.getText()));
+        });
+        newBookGuestID.addActionListener(e -> {
+            for (Guest g: fm.seeUsers()
+                 ) {
+                if (g.getUserID()==Integer.parseInt(newBookGuestID.getText())) {
+                    newBookName.setText(g.getName());
+                    newBookSurname.setText(g.getSurname());
+                }
+            }
+        });
+        newBookGuestID.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                for (Guest g: fm.seeUsers()
+                ) {
+                    if (g.getName().equals(newBookName.getText())&&g.getSurname().equals(newBookSurname.getText())) {
+                        newBookGuestID.setText(String.valueOf(g.getUserID()));
+                    }
+                }
+            }
         });
     }
 
@@ -143,7 +195,15 @@ public class BookingsMenu extends JFrame {
             }
         };
         printOutArea = new JTextArea();
+        comboSize = new JComboBox();
+        comboSize.addItem("1");
+        comboSize.addItem("2");
+        comboSize.addItem("3");
 
+        comboTier=new JComboBox();
+        comboTier.addItem("Economy");
+        comboTier.addItem("Normal");
+        comboTier.addItem("Luxury");
 
         printOutArea.setEditable(false);
         JTextAreaOutputStream out = new JTextAreaOutputStream(printOutArea);
@@ -154,6 +214,7 @@ public class BookingsMenu extends JFrame {
     }
 
     public static void main(String[] args) {
+        Room.deleteGuestRooms(9);
         ManageBookings();
     }
 

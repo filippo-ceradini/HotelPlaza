@@ -495,7 +495,7 @@ public class Room implements Serializable {
                 }
             }
             if (free == true) {
-                System.out.println("Room No." + ID + " Tier: " + tierName(storing[ID].tier) + " Price: " + storing[ID].price);
+                System.out.println("Room No." + ID + " Size: "+ size +" Tier: " + tierName(storing[ID].tier) + " Price: " + storing[ID].price);
             }
         }
     }
@@ -591,7 +591,7 @@ public class Room implements Serializable {
                 }
             }
             if (free == true) {
-                System.out.println("Room No." + ID + " Size: " + storing[ID].size + " Price: " + storing[ID].price);
+                System.out.println("Room No." + ID + " ,Tier: " +tier+ " Size: " + storing[ID].size + " Price: " + storing[ID].price);
             }
         }
     }
@@ -777,7 +777,7 @@ public class Room implements Serializable {
                 }
             }
             if (free == true) {
-                System.out.println("Room No." + ID + " Tier: " + tierName(storing[ID].tier) + " Size: " + storing[ID].size + " Price: " + storing[ID].price);
+                System.out.println("        Room No." + ID + "     Tier: " + tierName(storing[ID].tier) + "     Size: " + storing[ID].size + "   Price: " + storing[ID].price);
             }
         }
     }
