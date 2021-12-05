@@ -79,7 +79,6 @@ public class FileManager {
         return roomsNo;
     }
 
-
     public void saveChange(Room[] room) {
 
         try {

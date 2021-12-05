@@ -11,6 +11,7 @@ public class Room implements Serializable {
     private int tier;
     private int price;
     private int[][][] ticket = new int[4][13][32];
+    static int[] bookdate = new int[6];
 
     public Room(int ID, int size, int tier) {
         this.ID = ID;
@@ -260,6 +261,7 @@ public class Room implements Serializable {
     }
 
     public static void allRoomsStatus() {
+        System.out.println("");
         for (int i = 0; i < dataBase.seeRoomsNo().size(); i++) {
             seeRoomStatus(dataBase.seeRoomsNo().get(i));
         }
@@ -277,6 +279,7 @@ public class Room implements Serializable {
 
     public static void seeRoomStatus(int ID) {
         Room[] storing = dataBase.seeRooms();
+
         boolean free = true;
         for (int j = 1; j < 4; j++) {
             for (int k = 1; k < 13; k++) {
@@ -290,7 +293,7 @@ public class Room implements Serializable {
         if (free == true) {
             System.out.println("Room No." + ID + " has no bookings.");
         } else {
-            System.out.print("Room No." + ID + " is taken: ");
+            System.out.print("Room No." + ID + " is taken: \n");
         }
         boolean inBooking = false;
         int IDUsing = 0;
@@ -298,7 +301,7 @@ public class Room implements Serializable {
             for (int k = 1; k < 13; k++) {
                 for (int l = 1; l < 32; l++) {
                     if (storing[ID].empty[j][k][l] == false && inBooking == false) {
-                        System.out.print("By: " + storing[ID].takenBy[j][k][l] + " From: " + (2020 + j) + "-" + k + "-" + l);
+                        System.out.print("By: " +  dataBase.seeUsers().get(storing[ID].takenBy[j][k][l]-1).getLogin() + " ID:"+dataBase.seeUsers().get(storing[ID].takenBy[j][k][l]-1).getUserID()+ " From: " + (2020 + j) + "-" + k + "-" + l);
                         IDUsing = storing[ID].takenBy[j][k][l];
                         inBooking = true;
                     }
@@ -335,7 +338,7 @@ public class Room implements Serializable {
                         } else {
                             System.out.println(" Until: " + (2020 + j) + "-" + k + "-" + (l - 1));
                         }
-                        System.out.print("By: " + dataBase.seeUsers().get(storing[ID].takenBy[j][k][l]).getLogin() + " From: " + (2020 + j) + "-" + k + "-" + l);
+                        System.out.print("By: " + dataBase.seeUsers().get(storing[ID].takenBy[j][k][l]-1).getLogin()  +" ID:"+dataBase.seeUsers().get(storing[ID].takenBy[j][k][l]-1).getUserID()+ " From: " + (2020 + j) + "-" + k + "-" + l);
                         IDUsing = storing[ID].takenBy[j][k][l];
                     }
                 }
@@ -355,24 +358,24 @@ public class Room implements Serializable {
                 for (int k = 1; k < 13; k++) {
                     for (int l = 1; l < 31; l++) {
                         if (storing[ID].takenBy[j][k][l] == guestID && inBooking == false) {
-                            System.out.print("By: " + dataBase.seeUsers().get(storing[ID].takenBy[j][k][l]).getLogin() + " From: " + j + "-" + k + "-" + l);
+                            System.out.print("Room "+ ID+" By: " + dataBase.seeUsers().get(storing[ID].takenBy[j][k][l]-1).getLogin() + " From: " + (2020+j) + "-" + k + "-" + l);
                             IDUsing = storing[ID].takenBy[j][k][l];
                             inBooking = true;
                         }
                         if (inBooking == true && storing[ID].takenBy[j][k][l] != IDUsing) {
                             if ((l - 1) == 0) {
                                 if (k == 2 || k == 4 || k == 6 || k == 8 || k == 9 || k == 11 || k == 1) {
-                                    System.out.println(" Until: " + j + "-" + (k - 1) + "-" + 31);
+                                    System.out.println(" Until: " + (2020+j) + "-" + (k - 1) + "-" + 31);
                                 } else if (k == 5 || k == 7 || k == 10 || k == 12) {
-                                    System.out.println(" Until: " + j + "-" + (k - 1) + "-" + 30);
+                                    System.out.println(" Until: " + (2020+j) + "-" + (k - 1) + "-" + 30);
                                 } else if (k == 3) {
-                                    System.out.println(" Until: " + j + "-" + (k - 1) + "-" + 28);
+                                    System.out.println(" Until: " + (2020+j) + "-" + (k - 1) + "-" + 28);
                                 }
                                 if ((k - 1) == 0) {
-                                    System.out.println(" Until: " + (j - 1) + "-" + 12 + "-" + 31);
+                                    System.out.println(" Until: " + (2020+j - 1) + "-" + 12 + "-" + 31);
                                 }
                             } else {
-                                System.out.println(" Until: " + j + "-" + k + "-" + (l - 1));
+                                System.out.println(" Until: " + (2020+j) + "-" + k + "-" + (l - 1));
                             }
                             inBooking = false;
                         }
@@ -911,7 +914,7 @@ public class Room implements Serializable {
                 for (int k = 1; k < 13; k++) {
                     for (int l = 1; l < 32; l++) {
                         if (storing[ID].empty[j][k][l] == false && inBooking == false) {
-                            System.out.print("By: " + storing[ID].takenBy[j][k][l] + " From: " + (2020 + j) + "-" + k + "-" + l);
+                            System.out.print("By: " + dataBase.seeUsers().get(storing[ID].takenBy[j][k][l]-1).getLogin() + ", ID: " + storing[ID].takenBy[j][k][l] + " From: " + (2020 + j) + "-" + k + "-" + l);
                             IDUsing = storing[ID].takenBy[j][k][l];
                             inBooking = true;
                         }
@@ -948,7 +951,7 @@ public class Room implements Serializable {
                             } else {
                                 System.out.println(" Until: " + (2020 + j) + "-" + k + "-" + (l - 1));
                             }
-                            System.out.print("By: " + dataBase.seeUsers().get(storing[ID].takenBy[j][k][l]).getLogin() + " From: " + (2020 + j) + "-" + k + "-" + l);
+                            System.out.print("By: " + dataBase.seeUsers().get(storing[ID].takenBy[j][k][l]-1).getLogin() + ", ID: " + dataBase.seeUsers().get(storing[ID].takenBy[j][k][l]-1).getUserID() +" From: " + (2020 + j) + "-" + k + "-" + l);
                             IDUsing = storing[ID].takenBy[j][k][l];
                         }
                     }
@@ -971,7 +974,7 @@ public class Room implements Serializable {
                 for (int k = 1; k < 13; k++) {
                     for (int l = 1; l < 32; l++) {
                         if (storing[room].takenBy[j][k][l] == user) {
-                            convert = String.valueOf(storing[room].ticket[j][k][l]);
+                            convert = String.valueOf(storing[room].ticket[j][k][l]*storing[room].price);
                             print = "You owe us ";
                             print += convert;
                             print += "\nWe accept Mastercard, Visa, Dollars\nGolden coins, Euros, Złoty, Firstborn child";
@@ -985,6 +988,63 @@ public class Room implements Serializable {
         } catch (NullPointerException e){
         }
         GUI.Diag(print);
+    }
+
+    public static int[] getBookingDate(int user, int room) {
+            int ID = room;
+            int[] bookDate= new int[6];
+            Room[] storing = dataBase.seeRooms();
+            boolean inBooking = false;
+            int IDUsing = 0;
+            for (int j = 1; j < 4; j++) {
+                for (int k = 1; k < 13; k++) {
+                    for (int l = 1; l < 31; l++) {
+                        if (storing[ID].takenBy[j][k][l] == user && inBooking == false) {
+                            //System.out.print("By: " + dataBase.seeUsers().get(storing[ID].takenBy[j][k][l]).getLogin() + " From: " + j + "-" + k + "-" + l);
+                            bookDate[0]=j;
+                            bookDate[1]=k;
+                            bookDate[2]=l;
+                            IDUsing = storing[ID].takenBy[j][k][l];
+                            inBooking = true;
+                        }
+                        if (inBooking == true && storing[ID].takenBy[j][k][l] != IDUsing) {
+                            if ((l - 1) == 0) {
+                                if (k == 2 || k == 4 || k == 6 || k == 8 || k == 9 || k == 11 || k == 1) {
+                                    //System.out.println(" Until: " + j + "-" + (k - 1) + "-" + 31);
+                                    bookDate[3]=j;
+                                    bookDate[4]=(k-1);
+                                    bookDate[5]=31;
+                                } else if (k == 5 || k == 7 || k == 10 || k == 12) {
+                                    //System.out.println(" Until: " + j + "-" + (k - 1) + "-" + 30);
+                                    bookDate[3]=j;
+                                    bookDate[4]=k-1;
+                                    bookDate[5]=30;
+                                } else if (k == 3) {
+                                    //System.out.println(" Until: " + j + "-" + (k - 1) + "-" + 28);
+                                    bookDate[3]=j;
+                                    bookDate[4]=k-1;
+                                    bookDate[5]=28;
+                                }
+                                if ((k - 1) == 0) {
+                                    //System.out.println(" Until: " + (j - 1) + "-" + 12 + "-" + 31);
+                                    bookDate[3]=j-1;
+                                    bookDate[4]=12;
+                                    bookDate[5]=31;
+                                }
+                            } else {
+                                //System.out.println(" Until: " + j + "-" + k + "-" + (l - 1));
+                                bookDate[3]=j;
+                                bookDate[4]=k;
+                                bookDate[5]=l-1;
+                            }
+                            inBooking = false;
+                        }
+                    }
+                }
+
+            }
+
+        return bookDate;
     }
 
 

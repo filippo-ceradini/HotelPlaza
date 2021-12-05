@@ -8,7 +8,7 @@ import java.util.Random;
 public class Run {
 
     public static void main(String[] args) throws IOException {
-        Room[] rm = new Room[500];
+        /*Room[] rm = new Room[500];
         FileManager sm = new FileManager();
         sm.saveChange(rm);
         int cnt=0;
@@ -26,11 +26,11 @@ public class Run {
         Room.availableByDate(2021,2021,1,12,17,1);
         Room.availableByPrice(100,200,2021,2021,1,12,17,1);
         Room.availableByTier(1,2021,2021,1,12,17,1);
-        Room.allRoomsBookings();
+        //Room.allRoomsBookings();
         //Room.deleteGuestRooms(1);
-        Room.allRoomsBookings();
+        //Room.allRoomsBookings();
 
-        Room.allRooms();
+        //Room.allRooms();*/
         GUI.login();
 
 

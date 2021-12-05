@@ -25,34 +25,13 @@ public class AdManageRooms extends JFrame {
     private JButton button1;
 
     public AdManageRooms() {
-        goBack.addActionListener(e -> {
-            try {
-                GUI.login();
-                this.dispose();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            this.dispose();
-        });
+
         editButton.addActionListener(e -> {
+            Room[] rm= l.seeRooms();
+
             Room.createRoom(Integer.parseInt(editSize.getText()),Integer.parseInt(editTier.getText()),Integer.parseInt(ediRoomNr.getText()));
             GUI.Diag("Room Successfuly Edited");
             Room.allRooms();
-        });
-
-        this.setContentPane(panelImg);
-        this.setSize(1280, 800);
-        this.setResizable(false);
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ediRoomNr.addActionListener(e -> {
-            //editSize.setText(l.seeRooms()[Integer.parseInt(ediRoomNr.getText())]);
-        });
-        editTier.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
         });
 
         editSize.addMouseListener(new MouseAdapter() {
@@ -68,32 +47,35 @@ public class AdManageRooms extends JFrame {
                         }
                     }
                 } catch (NullPointerException ne) {
-
                 }
-
                 editSize.setText(String.valueOf(newRoom.getSize()));
                 editTier.setText(String.valueOf(newRoom.getTier()));
                 editPrice.setText(String.valueOf(newRoom.getPrice()));
-
-
             }
         });
 
-    }
+        goBack.addActionListener(e -> {
+            try {
+                GUI.login();
+                this.dispose();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            this.dispose();
+        });
 
-    public String printRooms() {
-        String data = "";
-        for (int i = 0; i < FileManager.getStaff().size(); i++) {
-            data = data + FileManager.getStaff().get(i).toString() + "\n";
-        }
-        return data;
+        this.setContentPane(panelImg);
+        this.setSize(1280, 800);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public static void menuRooms() {
-
         JFrame m = new AdManageRooms();
         m.setVisible(true);
-Room.allRooms();
+        Room.allRooms();
+        Room.allRoomsStatus();
 
     }
 

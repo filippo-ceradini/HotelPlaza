@@ -101,9 +101,7 @@ public class GUI {
             int cnt = 0;
             for (Guest guest : fm.seeUsers()
             ) {
-                System.out.println(login.getText() + guest.getLogin() + guest.getPassword() + input);
                 if (login.getText().equals(guest.getLogin()) && Arrays.equals(guest.getPassword().toCharArray(), input)) {
-                    System.out.println(login.getText() + guest.getLogin() + guest.getPassword().toCharArray() + input);
                     GuestID = guest.getUserID();
                     GuestMenu.GuestMenue(GuestID);
                     cnt++;
