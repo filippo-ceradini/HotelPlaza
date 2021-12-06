@@ -67,7 +67,7 @@ public class GuestGUI extends JFrame {
 
         JFrame m = new GuestGUI();
         m.setVisible(true);
-        Print.test();
+
     }
 
 
